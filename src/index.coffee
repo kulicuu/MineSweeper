@@ -19,12 +19,14 @@ Route = React.createFactory _Route
 
 
 window.onload = =>
-    {width, height, x, y} = root.getBoundingClientRect()
+    {width, height} = root.getBoundingClientRect()
 
-    initial_state = Immutable.Map
-        routing: '/'
-        viewport_width: width
-        viewport_height: height
+    index_ui_initial_state =
+    require('./store/index_ui_initial_state.coffee')(width, height)
+    initial_state = Immutable.Map index_ui_initial_state
+        # routing: '/'
+        # viewport_width: width
+        # viewport_height: height
         # viewport_x: x
         # viewport_y: y
 
@@ -44,10 +46,8 @@ window.onload = =>
             if callNow then func.apply(context, args)
 
     set_boundingRect = ->
-        {width, height, x, y} = root.getBoundingClientRect()
+        { width, height } = root.getBoundingClientRect()
         arq =
-            viewport_x: x
-            viewport_y: y
             viewport_width: width
             viewport_height: height
         store.dispatch(set_bounding_rect(arq))
@@ -58,10 +58,6 @@ window.onload = =>
         selectLocationState: (state)->
             return state.get('routing')
     )
-
-
-
-
 
     minesweeper = React.createFactory require('./containers/minesweeper_000_.coffee')
 

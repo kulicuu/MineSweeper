@@ -7,6 +7,7 @@ filter = React.createFactory 'filter'
 foreignObject = React.createFactory 'foreignObject'
 feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
+feOffset = React.createFactory 'feOffset'
 
 # font_awesome = require 'react-fontawesome'
 
@@ -65,6 +66,35 @@ module.exports = minesweeper = rr
             width: '100%'
             height: '100%'
             ,
+            f1_x = .005 * @props.tMat[0]
+            f1_y = .005 * @props.tMat[4]
+            std_dev = .001 * @props.tMat[0]
+            # f1_x = 4
+            # f1_y = 4
+            # std_dev = 1.5
+            defs
+                radialGradient
+                    id: "rGrad_001"
+                    stop
+                        offset: "30%"
+                        stopColor: 'lightgrey'
+                    stop
+                        offset:"70%"
+                        stopColor: "blue"
+                    stop
+                        offset:"95%"
+                        stopColor:"lightblue"
+                filter
+                    id: 'f1'
+                    feGaussianBlur
+                        in: "SourceGraphic"
+                        result: "blurOut"
+                        stdDeviation: std_dev
+                    feOffset
+                        in: "blurOut"
+                        result: "dropBlur"
+                        dx: f1_x
+                        dy: f1_y
 
             for row, idx in transforms
                 for l_tMat, jdx in row
@@ -86,4 +116,7 @@ module.exports = minesweeper = rr
                         y: tile.y
                         width: tile.width
                         height: tile.height
-                        fill: color
+                        # fill: color
+                        # filter: 'url(#f1)'
+                        fill: 'url(#rGrad_001)'
+                        stroke: 'blue'

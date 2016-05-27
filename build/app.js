@@ -73,13 +73,10 @@
 
 	window.onload = (function(_this) {
 	  return function() {
-	    var debounce, height, history, index, initial_state, minesweeper, ref2, set_boundingRect, store, width, x, y;
-	    ref2 = root.getBoundingClientRect(), width = ref2.width, height = ref2.height, x = ref2.x, y = ref2.y;
-	    initial_state = Immutable.Map({
-	      routing: '/',
-	      viewport_width: width,
-	      viewport_height: height
-	    });
+	    var debounce, height, history, index, index_ui_initial_state, initial_state, minesweeper, ref2, set_boundingRect, store, width;
+	    ref2 = root.getBoundingClientRect(), width = ref2.width, height = ref2.height;
+	    index_ui_initial_state = __webpack_require__(319)(width, height);
+	    initial_state = Immutable.Map(index_ui_initial_state);
 	    store = __webpack_require__(295)(initial_state);
 	    debounce = function(func, wait, immediate) {
 	      var timeout;
@@ -104,10 +101,8 @@
 	    };
 	    set_boundingRect = function() {
 	      var arq, ref3;
-	      ref3 = root.getBoundingClientRect(), width = ref3.width, height = ref3.height, x = ref3.x, y = ref3.y;
+	      ref3 = root.getBoundingClientRect(), width = ref3.width, height = ref3.height;
 	      arq = {
-	        viewport_x: x,
-	        viewport_y: y,
 	        viewport_width: width,
 	        viewport_height: height
 	      };
@@ -59175,6 +59170,8 @@
 
 	feImage = React.createFactory('feImage');
 
+	feOffset = React.createFactory('feOffset');
+
 	module.exports = minesweeper = rr({
 	  rect_t: function(s_rect) {
 	    var height, origin, width, x, y;
@@ -59229,12 +59226,34 @@
 	    return results;
 	  },
 	  render: function() {
-	    var color, idx, jdx, l_tMat, row, tile, tile_0, transforms;
+	    var color, f1_x, f1_y, idx, jdx, l_tMat, row, std_dev, tile, tile_0, transforms;
 	    transforms = this.tile_transforms();
 	    return svg({
 	      width: '100%',
 	      height: '100%'
-	    }, (function() {
+	    }, f1_x = .005 * this.props.tMat[0], f1_y = .005 * this.props.tMat[4], std_dev = .001 * this.props.tMat[0], defs, radialGradient({
+	      id: "rGrad_001"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "blue"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "lightblue"
+	    })), filter({
+	      id: 'f1'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f1_x,
+	      dy: f1_y
+	    })), (function() {
 	      var i, len, results;
 	      results = [];
 	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {
@@ -59267,7 +59286,8 @@
 	              y: tile.y,
 	              width: tile.width,
 	              height: tile.height,
-	              fill: color
+	              fill: 'url(#rGrad_001)',
+	              stroke: 'blue'
 	            }));
 	          }
 	          return results1;
@@ -59290,12 +59310,10 @@
 	SET_BOUNDING_RECT = __webpack_require__(286).SET_BOUNDING_RECT;
 
 	set_bounding_rect = function(arg) {
-	  var viewport_height, viewport_width, viewport_x, viewport_y;
-	  viewport_x = arg.viewport_x, viewport_y = arg.viewport_y, viewport_width = arg.viewport_width, viewport_height = arg.viewport_height;
+	  var viewport_height, viewport_width;
+	  viewport_width = arg.viewport_width, viewport_height = arg.viewport_height;
 	  return {
 	    type: SET_BOUNDING_RECT,
-	    viewport_x: viewport_x,
-	    viewport_y: viewport_y,
 	    viewport_width: viewport_width,
 	    viewport_height: viewport_height
 	  };
@@ -59303,6 +59321,22 @@
 
 	module.exports = {
 	  set_bounding_rect: set_bounding_rect
+	};
+
+
+/***/ },
+/* 318 */,
+/* 319 */
+/***/ function(module, exports) {
+
+	var index_ui_initial_state;
+
+	module.exports = index_ui_initial_state = function(width, height) {
+	  return {
+	    routing: '/',
+	    viewport_width: width,
+	    viewport_height: height
+	  };
 	};
 
 
