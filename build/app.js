@@ -59118,22 +59118,33 @@
 /* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _, c, connect, map_dispatch_to_props, map_state_to_props, minesweeper, minesweeper_container, ref;
+	var React, React_DOM, _, assign, c, connect, gl_mat, keys, map_dispatch_to_props, map_state_to_props, mat3, minesweeper, minesweeper_container, ref, rr, shortid, vec2, vec3;
 
-	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
 
 	connect = __webpack_require__(198).connect;
 
 	minesweeper = __webpack_require__(316);
 
 	map_state_to_props = function(state, own_props) {
-	  var height, smaller, transform_matrix, width;
+	  var board_transform, composed_transform, height, larger, margin, port, size, smaller, transform_matrix, width;
 	  width = state.get('viewport_width');
 	  height = state.get('viewport_height');
 	  smaller = width < height ? width : height;
+	  larger = width > height ? width : height;
+	  size = 20;
+	  margin = .1;
+	  port = 1 - margin;
 	  transform_matrix = [smaller, 0, 0, 0, smaller, 0, 1 / width, 1 / height, 1];
+	  board_transform = [1, 0, 0, 0, 1, 0, (width / 2) - ((port * smaller) / 2), (height / 2) - ((port * smaller) / 2), 1];
+	  composed_transform = mat3.multiply(mat3.create(), board_transform, transform_matrix);
 	  return {
-	    tMat: transform_matrix
+	    margin: margin,
+	    size: size,
+	    smaller: smaller,
+	    height: height,
+	    width: width,
+	    tMat: composed_transform
 	  };
 	};
 
@@ -59187,74 +59198,53 @@
 	      height: height * l_tMat[4]
 	    };
 	  },
-	  item_0: function() {
-	    var s_rect;
-	    s_rect = {
-	      width: .1,
-	      height: .2,
-	      x: .5,
-	      y: 0.5
-	    };
-	    return this.rect_t(s_rect);
-	  },
 	  tile_000: function(l_tMat) {
-	    var s_rect, y;
+	    var s_rect;
 	    s_rect = {
 	      width: 1,
 	      height: 1,
 	      x: 0,
 	      y: 0
 	    };
-	    y = this.rect_l_t(s_rect, l_tMat);
-	    return y;
+	    return this.rect_l_t(s_rect, l_tMat);
 	  },
 	  tile_transforms: function() {
-	    var i, idx, jdx, margin, port, ref2, results, size, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
-	    size = 10;
+	    var i, idx, jdx, port, ref2, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
 	    smaller = this.props.tMat[0];
-	    margin = .1;
-	    port = 1 - margin;
-	    tile_size = port / size;
+	    port = 1 - this.props.margin;
+	    tile_size = port / this.props.size;
 	    results = [];
-	    for (idx = i = 0, ref2 = size - 1; 0 <= ref2 ? i <= ref2 : i >= ref2; idx = 0 <= ref2 ? ++i : --i) {
+	    for (idx = i = 0, ref2 = this.props.size - 1; 0 <= ref2 ? i <= ref2 : i >= ref2; idx = 0 <= ref2 ? ++i : --i) {
 	      results.push((function() {
 	        var j, ref3, results1;
 	        results1 = [];
-	        for (jdx = j = 0, ref3 = size - 1; 0 <= ref3 ? j <= ref3 : j >= ref3; jdx = 0 <= ref3 ? ++j : --j) {
+	        for (jdx = j = 0, ref3 = this.props.size - 1; 0 <= ref3 ? j <= ref3 : j >= ref3; jdx = 0 <= ref3 ? ++j : --j) {
 	          x_displacement = jdx * tile_size;
 	          y_displacement = idx * tile_size;
 	          results1.push(transform_matrix = [tile_size, 0, 0, 0, tile_size, 0, x_displacement, y_displacement, 1]);
 	        }
 	        return results1;
-	      })());
+	      }).call(this));
 	    }
 	    return results;
 	  },
 	  render: function() {
-	    var color, idx, item_0, jdx, l_tMat, row, tile, tile_0, trats;
-	    item_0 = this.item_0();
-	    trats = this.tile_transforms();
+	    var color, idx, jdx, l_tMat, row, tile, tile_0, transforms;
+	    transforms = this.tile_transforms();
 	    return svg({
 	      width: '100%',
 	      height: '100%'
-	    }, rect({
-	      x: item_0.x,
-	      y: item_0.y,
-	      width: item_0.width,
-	      height: item_0.height,
-	      fill: 'white',
-	      opacity: .5
-	    }), (function() {
+	    }, (function() {
 	      var i, len, results;
 	      results = [];
-	      for (idx = i = 0, len = trats.length; i < len; idx = ++i) {
-	        row = trats[idx];
+	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {
+	        row = transforms[idx];
 	        results.push((function() {
 	          var j, len1, results1;
 	          results1 = [];
 	          for (jdx = j = 0, len1 = row.length; j < len1; jdx = ++j) {
 	            l_tMat = row[jdx];
-	            switch ((idx * jdx) % 5) {
+	            switch (((idx * jdx) + idx) % 5) {
 	              case 0:
 	                color = 'white';
 	                break;
