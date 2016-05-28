@@ -1,6 +1,6 @@
 
 
-module.exports = index_ui_initial_state = (width, height) ->
+module.exports = ui_base = ({width, height}) ->
     routing: '/'
     viewport_width: width
     viewport_height: height

@@ -16,21 +16,11 @@ Route = React.createFactory _Route
 
 { set_bounding_rect } = require './actions/set_bounding_rect.coffee'
 
-
-
 window.onload = =>
-    {width, height} = root.getBoundingClientRect()
-
-    index_ui_initial_state =
-    require('./store/index_ui_initial_state.coffee')(width, height)
-    initial_state = Immutable.Map index_ui_initial_state
-        # routing: '/'
-        # viewport_width: width
-        # viewport_height: height
-        # viewport_x: x
-        # viewport_y: y
-
-    store = require('./store/configure_store.coffee')(initial_state)
+    { width, height } = root.getBoundingClientRect()
+    initial_state_pre = require('./store/initial_state/index.coffee')({width, height})
+    initial_state = Immutable.Map initial_state_pre
+    store = require('./store/configure_store.coffee')({initial_state, initial_state_pre})
 
     debounce = (func, wait, immediate) ->
         timeout = 'scoped here'

@@ -7,9 +7,17 @@
 minesweeper = require '../components/minesweeper_000_.coffee'
 
 
+grab_board = (state) ->
+    c 'in grab board'
+    c state.get 'size'
+
+
 map_state_to_props = (state, own_props) ->
     # viewport_x = state.get 'viewport_x'
     # viewport_y = state.get 'viewport_y'
+
+    grab_board state
+
     width = state.get 'viewport_width'
     height = state.get 'viewport_height'
 

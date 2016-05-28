@@ -17,6 +17,7 @@
         "less-loader": "^2.2.1",
         "react-fontawesome": "latest",
         "react": "15.1.0",
+        "react-addons-pure-render-mixin": "latest",
         "react-dom": "15.1.0",
         "react-redux": "latest",
         "react-router": "latest",
