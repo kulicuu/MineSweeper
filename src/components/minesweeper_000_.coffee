@@ -53,6 +53,23 @@ module.exports = minesweeper = rr
             y: 0
         @rect_l_t s_rect, l_tMat
 
+    restart_button: ->
+        c 'orientation', @props.orientation
+        switch @props.orientation
+            when 'horizontal'
+                s_button =
+                    x: .91
+                    y: .3
+                    width: .063
+                    height: .063
+            when 'vertical'
+                s_button =
+                    x: .3
+                    y: .91
+                    width: .063
+                    height: .063
+        @rect_t s_button
+
 
 
     tile_transforms: ->
@@ -76,7 +93,7 @@ module.exports = minesweeper = rr
 
     render: ->
         transforms = @tile_transforms()
-
+        restart_button = @restart_button()
         svg
             width: '100%'
             height: '100%'
@@ -87,6 +104,7 @@ module.exports = minesweeper = rr
             # f1_x = 4
             # f1_y = 4
             # std_dev = 1.5
+
             defs
                 radialGradient
                     id: "rGrad_001"
@@ -110,6 +128,24 @@ module.exports = minesweeper = rr
                         result: "dropBlur"
                         dx: f1_x
                         dy: f1_y
+            rect
+                x: restart_button.x
+                y: restart_button.y
+                width: restart_button.width
+                height: restart_button.height
+                fill: 'white'
+                onClick: @props.start_new_game
+                cursor: 'pointer'
+            text
+                x: restart_button.x + (restart_button.width * .16)
+                y: restart_button.y + (restart_button.height * .85)
+                fill: 'red'
+                fontSize: restart_button.height * .8
+                fontFamily: 'sans'
+                onClick: @props.start_new_game
+                cursor: 'pointer'
+                ,
+                "↻"
 
             for row, idx in transforms
                 for l_tMat, jdx in row

@@ -59061,29 +59061,42 @@
 /* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _, c, combineReducers, ref;
+	var LOSE_GAME, REVEAL, REVEAL_MULTIPLE, START_NEW_GAME, TOGGLE_FLAG, WIN_GAME, _, c, combineReducers, ref, ref1;
 
 	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
 
 	combineReducers = __webpack_require__(303).combineReducers;
 
+	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, WIN_GAME = ref1.WIN_GAME, LOSE_GAME = ref1.LOSE_GAME;
+
 	module.exports = function(arg) {
-	  var arq_0, arq_1, arq_2, initial_state, initial_state_pre, ref1, routeReducer, viewport_height, viewport_width;
+	  var app_reducer, arq_0, arq_1, arq_2, initial_state, initial_state_pre, ref2, root_reducer, routeReducer, viewport_height, viewport_width;
 	  initial_state = arg.initial_state, initial_state_pre = arg.initial_state_pre;
 	  c('initial_state in reducer index', initial_state);
 	  routeReducer = __webpack_require__(309);
-	  ref1 = __webpack_require__(310), viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
-	  arq_2 = __webpack_require__(311)({
-	    initial_state_pre: initial_state_pre,
-	    initial_state: initial_state
-	  });
+	  ref2 = __webpack_require__(310), viewport_height = ref2.viewport_height, viewport_width = ref2.viewport_width;
 	  arq_0 = {
 	    viewport_width: viewport_width,
 	    viewport_height: viewport_height,
 	    routing: routeReducer
 	  };
+	  arq_2 = __webpack_require__(311)({
+	    initial_state: initial_state,
+	    arq_0: arq_0
+	  });
 	  arq_1 = _.assign(arq_0, arq_2);
-	  return combineReducers(arq_1);
+	  app_reducer = combineReducers(arq_1);
+	  root_reducer = (function(_this) {
+	    return function(state, action) {
+	      if (action.type === START_NEW_GAME) {
+	        state = void 0;
+	        return app_reducer(state = initial_state, action);
+	      } else {
+	        return app_reducer(state, action);
+	      }
+	    };
+	  })(this);
+	  return root_reducer;
 	};
 
 
@@ -59365,9 +59378,11 @@
 /* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var FLAGGED, LOSE_GAME, MINED, NOT_FLAGGED, NOT_REVEALED, REVEAL, REVEALED, REVEAL_MULTIPLE, START_NEW_GAME, TILE, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, WIN_GAME, _, c, game_generics_reducer_factory, ref, ref1, ref2, tile_reducer_factory;
+	var FLAGGED, LOSE_GAME, MINED, NOT_FLAGGED, NOT_REVEALED, REVEAL, REVEALED, REVEAL_MULTIPLE, START_NEW_GAME, TILE, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, WIN_GAME, _, c, combineReducers, game_generics_reducer_factory, ref, ref1, ref2, tile_reducer_factory;
 
 	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
+
+	combineReducers = __webpack_require__(303).combineReducers;
 
 	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, WIN_GAME = ref1.WIN_GAME, LOSE_GAME = ref1.LOSE_GAME;
 
@@ -59385,7 +59400,6 @@
 	    if ((action.type === REVEAL) && (action.payload === ("TILE:" + idx + ":" + jdx)) && (is_revealed === NOT_REVEALED)) {
 	      return [is_mined, REVEALED, is_flagged].join(':');
 	    } else if ((action.type === REVEAL_MULTIPLE) && (_.includes(action.payload, TILE + ":" + idx + ":" + jdx)) && (is_revealed === NOT_REVEALED)) {
-	      c('is_mined', is_mined);
 	      return [is_mined, REVEALED, is_flagged].join(':');
 	    } else {
 	      return prev_state;
@@ -59407,6 +59421,9 @@
 	      prev_state = initial_state;
 	    }
 	    c('in game state reducer');
+	    if (action.type === START_NEW_GAME) {
+	      c('starting new game');
+	    }
 	    return prev_state;
 	  };
 	  time_elapsed_reducer = function(prev_state, action) {
@@ -59423,8 +59440,8 @@
 	};
 
 	module.exports = function(arg) {
-	  var arq, game_state_reducer, i, idx, initial_state, j, jdx, ref3, ref4, ref5, size, size_reducer, time_elapsed_reducer;
-	  initial_state = arg.initial_state;
+	  var arq, arq_0, game_state_reducer, i, idx, initial_state, j, jdx, ref3, ref4, ref5, size, size_reducer, time_elapsed_reducer;
+	  initial_state = arg.initial_state, arq_0 = arg.arq_0;
 	  ref3 = game_generics_reducer_factory(initial_state), size_reducer = ref3.size_reducer, game_state_reducer = ref3.game_state_reducer, time_elapsed_reducer = ref3.time_elapsed_reducer;
 	  arq = {
 	    SIZE: size_reducer,
@@ -59484,7 +59501,7 @@
 	grab_board = function(state) {};
 
 	map_state_to_props = function(state, own_props) {
-	  var GAME_STATE, SIZE, TIME_ELAPSED, arq_0, board_transform, composed_transform, height, larger, margin, obj_0, obj_1, obj_2, obj_3, port, size, smaller, transform_matrix, width;
+	  var GAME_STATE, SIZE, TIME_ELAPSED, arq_0, board_transform, composed_transform, height, larger, margin, obj_0, obj_1, obj_2, obj_3, orientation, port, size, smaller, transform_matrix, width;
 	  grab_board(state);
 	  obj_0 = state.toJS();
 	  obj_1 = state.toObject();
@@ -59495,6 +59512,7 @@
 	  height = state.get('viewport_height');
 	  smaller = width < height ? width : height;
 	  larger = width > height ? width : height;
+	  orientation = width < height ? 'vertical' : 'horizontal';
 	  size = state.get('SIZE');
 	  margin = .1;
 	  port = 1 - margin;
@@ -59508,6 +59526,7 @@
 	    board: obj_2,
 	    margin: margin,
 	    size: size,
+	    orientation: orientation,
 	    smaller: smaller,
 	    height: height,
 	    width: width,
@@ -59517,10 +59536,12 @@
 	};
 
 	map_dispatch_to_props = function(dispatch, own_props) {
-	  c('own_props', own_props);
 	  return {
 	    reveal: function(tile_coord) {
 	      return dispatch(reveal(tile_coord));
+	    },
+	    start_new_game: function() {
+	      return dispatch(start_new_game());
 	    }
 	  };
 	};
@@ -59543,7 +59564,10 @@
 	ref3 = __webpack_require__(290), NOT_STARTED = ref3.NOT_STARTED, IN_PROGRESS = ref3.IN_PROGRESS, FINISHED = ref3.FINISHED, TIME_ELAPSED = ref3.TIME_ELAPSED, GAME_STATE = ref3.GAME_STATE, SIZE = ref3.SIZE;
 
 	start_new_game = function() {
-	  return c('start new game');
+	  c('start new game');
+	  return {
+	    type: START_NEW_GAME
+	  };
 	};
 
 	reveal = function(tile_coord) {
@@ -59838,6 +59862,28 @@
 	    };
 	    return this.rect_l_t(s_rect, l_tMat);
 	  },
+	  restart_button: function() {
+	    var s_button;
+	    c('orientation', this.props.orientation);
+	    switch (this.props.orientation) {
+	      case 'horizontal':
+	        s_button = {
+	          x: .91,
+	          y: .3,
+	          width: .063,
+	          height: .063
+	        };
+	        break;
+	      case 'vertical':
+	        s_button = {
+	          x: .3,
+	          y: .91,
+	          width: .063,
+	          height: .063
+	        };
+	    }
+	    return this.rect_t(s_button);
+	  },
 	  tile_transforms: function() {
 	    var i, idx, jdx, port, ref3, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
 	    smaller = this.props.tMat[0];
@@ -59859,8 +59905,9 @@
 	    return results;
 	  },
 	  render: function() {
-	    var f1_x, f1_y, idx, jdx, l_tMat, row, std_dev, transforms;
+	    var f1_x, f1_y, idx, jdx, l_tMat, restart_button, row, std_dev, transforms;
 	    transforms = this.tile_transforms();
+	    restart_button = this.restart_button();
 	    return svg({
 	      width: '100%',
 	      height: '100%'
@@ -59886,7 +59933,23 @@
 	      result: "dropBlur",
 	      dx: f1_x,
 	      dy: f1_y
-	    })), (function() {
+	    })), rect({
+	      x: restart_button.x,
+	      y: restart_button.y,
+	      width: restart_button.width,
+	      height: restart_button.height,
+	      fill: 'white',
+	      onClick: this.props.start_new_game,
+	      cursor: 'pointer'
+	    }), text({
+	      x: restart_button.x + (restart_button.width * .16),
+	      y: restart_button.y + (restart_button.height * .85),
+	      fill: 'red',
+	      fontSize: restart_button.height * .8,
+	      fontFamily: 'sans',
+	      onClick: this.props.start_new_game,
+	      cursor: 'pointer'
+	    }, "↻"), (function() {
 	      var i, len, results;
 	      results = [];
 	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {

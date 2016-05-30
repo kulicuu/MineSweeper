@@ -40,6 +40,7 @@ map_state_to_props = (state, own_props) ->
     smaller = if width < height then width else height
     larger = if width > height then width else height
 
+    orientation = if width < height then 'vertical' else 'horizontal'
     size = state.get 'SIZE'
     margin = .1
     port = 1 - margin
@@ -66,7 +67,7 @@ map_state_to_props = (state, own_props) ->
         board: obj_2
         margin
         size
-
+        orientation
         smaller
         height
         width
@@ -77,10 +78,12 @@ map_state_to_props = (state, own_props) ->
     return arq_0
 
 map_dispatch_to_props = (dispatch, own_props) ->
-    c 'own_props', own_props
+
     return {
         reveal: (tile_coord) ->
             dispatch(reveal(tile_coord))
+        start_new_game: ->
+            dispatch(start_new_game())
     }
 
 module.exports = minesweeper_container = connect(map_state_to_props, map_dispatch_to_props)(minesweeper)

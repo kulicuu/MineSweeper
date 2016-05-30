@@ -12,6 +12,7 @@
 
 start_new_game = ->
     c 'start new game'
+    type: START_NEW_GAME
 
 reveal = (tile_coord) ->
     c 'reveaoling', tile_coord
