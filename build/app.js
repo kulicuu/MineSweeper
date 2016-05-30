@@ -75,12 +75,12 @@
 	  return function() {
 	    var debounce, height, history, index, initial_state, initial_state_pre, minesweeper, ref2, set_boundingRect, store, width;
 	    ref2 = root.getBoundingClientRect(), width = ref2.width, height = ref2.height;
-	    initial_state_pre = __webpack_require__(312)({
+	    initial_state_pre = __webpack_require__(287)({
 	      width: width,
 	      height: height
 	    });
 	    initial_state = Immutable.Map(initial_state_pre);
-	    store = __webpack_require__(288)({
+	    store = __webpack_require__(292)({
 	      initial_state: initial_state,
 	      initial_state_pre: initial_state_pre
 	    });
@@ -120,7 +120,7 @@
 	        return state.get('routing');
 	      }
 	    });
-	    minesweeper = React.createFactory(__webpack_require__(307));
+	    minesweeper = React.createFactory(__webpack_require__(313));
 	    index = rr({
 	      render: function() {
 	        return Provider({
@@ -57745,8 +57745,225 @@
 
 
 /***/ },
-/* 287 */,
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _, c, initial_state, ref;
+
+	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
+
+	module.exports = initial_state = function(arg) {
+	  var height, minesweeper, ui_base, width;
+	  width = arg.width, height = arg.height;
+	  ui_base = __webpack_require__(288)({
+	    width: width,
+	    height: height
+	  });
+	  minesweeper = __webpack_require__(289)();
+	  return _.assign(ui_base, minesweeper);
+	};
+
+
+/***/ },
 /* 288 */
+/***/ function(module, exports) {
+
+	var ui_base;
+
+	module.exports = ui_base = function(arg) {
+	  var height, width;
+	  width = arg.width, height = arg.height;
+	  return {
+	    routing: '/',
+	    viewport_width: width,
+	    viewport_height: height
+	  };
+	};
+
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var FINISHED, FLAGGED, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEALED, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, c, lay_mines, mine_and_salt_water, ref, ref1, ref2;
+
+	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
+
+	ref1 = __webpack_require__(290), NOT_STARTED = ref1.NOT_STARTED, IN_PROGRESS = ref1.IN_PROGRESS, FINISHED = ref1.FINISHED;
+
+	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
+
+	lay_mines = function(size, acc, mined_probability) {
+	  var i, idx, j, jdx, ref3, ref4;
+	  if (size == null) {
+	    size = 20;
+	  }
+	  if (acc == null) {
+	    acc = {};
+	  }
+	  if (mined_probability == null) {
+	    mined_probability = .23;
+	  }
+	  for (idx = i = 0, ref3 = size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
+	    for (jdx = j = 0, ref4 = size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
+	      if (Math.random() < mined_probability) {
+	        acc[TILE + ":" + idx + ":" + jdx] = MINED;
+	      } else {
+	        acc[TILE + ":" + idx + ":" + jdx] = UNMINED;
+	      }
+	    }
+	  }
+	  return acc;
+	};
+
+	mine_and_salt_water = function(size, acc) {
+	  var arq, counter, i, idx, j, jdx, number, ref3, ref4;
+	  if (size == null) {
+	    size = 20;
+	  }
+	  if (acc == null) {
+	    acc = {};
+	  }
+	  arq = lay_mines(size, {});
+	  for (idx = i = 0, ref3 = size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
+	    for (jdx = j = 0, ref4 = size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
+	      if (arq[TILE + ":" + idx + ":" + jdx] === UNMINED) {
+	        counter = 0;
+	        if (idx > 0) {
+	          if (arq[TILE + ":" + (idx - 1) + ":" + jdx] === MINED) {
+	            counter++;
+	          }
+	          if (jdx > 0) {
+	            if (arq[TILE + ":" + (idx - 1) + ":" + (jdx - 1)] === MINED) {
+	              counter++;
+	            }
+	          }
+	          if (jdx < (size - 1)) {
+	            if (arq[TILE + ":" + (idx - 1) + ":" + (jdx + 1)] === MINED) {
+	              counter++;
+	            }
+	          }
+	        }
+	        if (idx < (size - 1)) {
+	          if (arq[TILE + ":" + (idx + 1) + ":" + jdx] === MINED) {
+	            counter++;
+	          }
+	          if (jdx > 0) {
+	            if (arq[TILE + ":" + (idx + 1) + ":" + (jdx - 1)] === MINED) {
+	              counter++;
+	            }
+	          }
+	          if (jdx < (size - 1)) {
+	            if (arq[TILE + ":" + (idx + 1) + ":" + (jdx + 1)] === MINED) {
+	              counter++;
+	            }
+	          }
+	        }
+	        if (jdx > 0) {
+	          if (arq[TILE + ":" + idx + ":" + (jdx - 1)] === MINED) {
+	            counter++;
+	          }
+	        }
+	        if (jdx < (size - 1)) {
+	          if (arq[TILE + ":" + idx + ":" + (jdx + 1)] === MINED) {
+	            counter++;
+	          }
+	        }
+	        number = (function() {
+	          switch (counter) {
+	            case 0:
+	              return UNMINED_ZERO_MINE_NEIGHBORS;
+	            case 1:
+	              return UNMINED_ONE_MINE_NEIGHBOR;
+	            case 2:
+	              return UNMINED_TWO_MINE_NEIGHBORS;
+	            case 3:
+	              return UNMINED_THREE_MINE_NEIGHBORS;
+	            case 4:
+	              return UNMINED_FOUR_MINE_NEIGHBORS;
+	            case 5:
+	              return UNMINED_FIVE_MINE_NEIGHBORS;
+	            case 6:
+	              return UNMINED_SIX_MINE_NEIGHBORS;
+	            case 7:
+	              return UNMINED_SEVEN_MINE_NEIGHBORS;
+	            case 8:
+	              return UNMINED_EIGHT_MINE_NEIGHBORS;
+	          }
+	        })();
+	        acc[TILE + ":" + idx + ":" + jdx] = number + ":" + NOT_REVEALED + ":" + NOT_FLAGGED;
+	      } else if (arq[TILE + ":" + idx + ":" + jdx] === MINED) {
+	        acc[TILE + ":" + idx + ":" + jdx] = MINED + ":" + NOT_REVEALED + ":" + NOT_FLAGGED;
+	      } else {
+	        throw "problem in salt water";
+	      }
+	    }
+	  }
+	  return acc;
+	};
+
+	module.exports = function(size) {
+	  var game_meta, starting_board;
+	  if (size == null) {
+	    size = 20;
+	  }
+	  starting_board = mine_and_salt_water(size);
+	  game_meta = {
+	    TIME_ELAPSED: 0,
+	    GAME_STATE: NOT_STARTED,
+	    SIZE: size
+	  };
+	  return _.assign(game_meta, starting_board);
+	};
+
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var keymirror, minesweeper_game_states;
+
+	keymirror = __webpack_require__(286);
+
+	module.exports = minesweeper_game_states = keymirror({
+	  GAME_STATE: null,
+	  NOT_STARTED: null,
+	  IN_PROGRESS: null,
+	  FINISHED: null,
+	  TIME_ELAPSED: null
+	});
+
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var keymirror, tile_states;
+
+	keymirror = __webpack_require__(286);
+
+	module.exports = tile_states = keymirror({
+	  TILE: null,
+	  FLAGGED: null,
+	  NOT_FLAGGED: null,
+	  MINED: null,
+	  UNMINED: null,
+	  UNMINED_ZERO_MINE_NEIGHBORS: null,
+	  UNMINED_ONE_MINE_NEIGHBOR: null,
+	  UNMINED_TWO_MINE_NEIGHBORS: null,
+	  UNMINED_THREE_MINE_NEIGHBORS: null,
+	  UNMINED_FOUR_MINE_NEIGHBORS: null,
+	  UNMINED_FIVE_MINE_NEIGHBORS: null,
+	  UNMINED_SIX_MINE_NEIGHBORS: null,
+	  UNMINED_SEVEN_MINE_NEIGHBORS: null,
+	  UNMINED_EIGHT_MINE_NEIGHBORS: null,
+	  REVEALED: null,
+	  NOT_REVEALED: null
+	});
+
+
+/***/ },
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _, applyMiddleware, c, configure_store, createLogger, createStore, logger, promise, ref, ref1, thunk;
@@ -57755,18 +57972,18 @@
 
 	ref1 = __webpack_require__(204), createStore = ref1.createStore, applyMiddleware = ref1.applyMiddleware;
 
-	thunk = __webpack_require__(289)["default"];
+	thunk = __webpack_require__(293)["default"];
 
-	promise = __webpack_require__(290);
+	promise = __webpack_require__(294);
 
-	createLogger = __webpack_require__(297);
+	createLogger = __webpack_require__(301);
 
 	logger = createLogger();
 
 	configure_store = module.exports = function(arg) {
 	  var initial_state, initial_state_pre, root_reducer;
 	  initial_state = arg.initial_state, initial_state_pre = arg.initial_state_pre;
-	  root_reducer = __webpack_require__(298)({
+	  root_reducer = __webpack_require__(302)({
 	    initial_state: initial_state,
 	    initial_state_pre: initial_state_pre
 	  });
@@ -57775,7 +57992,7 @@
 
 
 /***/ },
-/* 289 */
+/* 293 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -57803,7 +58020,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 290 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57814,7 +58031,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(291);
+	var _fluxStandardAction = __webpack_require__(295);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -57841,7 +58058,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 291 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57852,7 +58069,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(292);
+	var _lodashIsplainobject = __webpack_require__(296);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -57871,7 +58088,7 @@
 	}
 
 /***/ },
-/* 292 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -57882,9 +58099,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(293),
-	    isArguments = __webpack_require__(294),
-	    keysIn = __webpack_require__(295);
+	var baseFor = __webpack_require__(297),
+	    isArguments = __webpack_require__(298),
+	    keysIn = __webpack_require__(299);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -57980,7 +58197,7 @@
 
 
 /***/ },
-/* 293 */
+/* 297 */
 /***/ function(module, exports) {
 
 	/**
@@ -58034,7 +58251,7 @@
 
 
 /***/ },
-/* 294 */
+/* 298 */
 /***/ function(module, exports) {
 
 	/**
@@ -58283,7 +58500,7 @@
 
 
 /***/ },
-/* 295 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -58294,8 +58511,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(294),
-	    isArray = __webpack_require__(296);
+	var isArguments = __webpack_require__(298),
+	    isArray = __webpack_require__(300);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -58421,7 +58638,7 @@
 
 
 /***/ },
-/* 296 */
+/* 300 */
 /***/ function(module, exports) {
 
 	/**
@@ -58607,7 +58824,7 @@
 
 
 /***/ },
-/* 297 */
+/* 301 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58840,22 +59057,22 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 298 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _, c, combineReducers, ref;
 
 	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
 
-	combineReducers = __webpack_require__(299).combineReducers;
+	combineReducers = __webpack_require__(303).combineReducers;
 
 	module.exports = function(arg) {
 	  var arq_0, arq_1, arq_2, initial_state, initial_state_pre, ref1, routeReducer, viewport_height, viewport_width;
 	  initial_state = arg.initial_state, initial_state_pre = arg.initial_state_pre;
 	  c('initial_state in reducer index', initial_state);
-	  routeReducer = __webpack_require__(305);
-	  ref1 = __webpack_require__(306), viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
-	  arq_2 = __webpack_require__(317)({
+	  routeReducer = __webpack_require__(309);
+	  ref1 = __webpack_require__(310), viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
+	  arq_2 = __webpack_require__(311)({
 	    initial_state_pre: initial_state_pre,
 	    initial_state: initial_state
 	  });
@@ -58870,7 +59087,7 @@
 
 
 /***/ },
-/* 299 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58880,7 +59097,7 @@
 	});
 	exports.combineReducers = undefined;
 
-	var _combineReducers = __webpack_require__(300);
+	var _combineReducers = __webpack_require__(304);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
@@ -58891,7 +59108,7 @@
 
 
 /***/ },
-/* 300 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58900,7 +59117,7 @@
 	    value: true
 	});
 
-	var _utilities = __webpack_require__(301);
+	var _utilities = __webpack_require__(305);
 
 	var _immutable = __webpack_require__(219);
 
@@ -58960,7 +59177,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 301 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58971,15 +59188,15 @@
 	});
 	exports.validateNextState = exports.getUnexpectedInvocationParameterMessage = exports.getStateName = undefined;
 
-	var _getStateName2 = __webpack_require__(302);
+	var _getStateName2 = __webpack_require__(306);
 
 	var _getStateName3 = _interopRequireDefault(_getStateName2);
 
-	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(303);
+	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(307);
 
 	var _getUnexpectedInvocationParameterMessage3 = _interopRequireDefault(_getUnexpectedInvocationParameterMessage2);
 
-	var _validateNextState2 = __webpack_require__(304);
+	var _validateNextState2 = __webpack_require__(308);
 
 	var _validateNextState3 = _interopRequireDefault(_validateNextState2);
 
@@ -58992,7 +59209,7 @@
 
 
 /***/ },
-/* 302 */
+/* 306 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59010,7 +59227,7 @@
 
 
 /***/ },
-/* 303 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59023,7 +59240,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _getStateName = __webpack_require__(302);
+	var _getStateName = __webpack_require__(306);
 
 	var _getStateName2 = _interopRequireDefault(_getStateName);
 
@@ -59060,7 +59277,7 @@
 
 
 /***/ },
-/* 304 */
+/* 308 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59082,7 +59299,7 @@
 
 
 /***/ },
-/* 305 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var LOCATION_CHANGE, c, routeReducer;
@@ -59110,7 +59327,7 @@
 
 
 /***/ },
-/* 306 */
+/* 310 */
 /***/ function(module, exports) {
 
 	var viewport_height, viewport_width;
@@ -59144,520 +59361,14 @@
 
 
 /***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React, React_DOM, _, assign, c, connect, gl_mat, grab_board, keys, map_dispatch_to_props, map_state_to_props, mat3, minesweeper, minesweeper_container, ref, rr, shortid, vec2, vec3;
-
-	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
-
-	connect = __webpack_require__(197).connect;
-
-	minesweeper = __webpack_require__(308);
-
-	grab_board = function(state) {
-	  c('in grab board');
-	  return c(state.get('size'));
-	};
-
-	map_state_to_props = function(state, own_props) {
-	  var board_transform, composed_transform, height, larger, margin, port, size, smaller, transform_matrix, width;
-	  grab_board(state);
-	  width = state.get('viewport_width');
-	  height = state.get('viewport_height');
-	  smaller = width < height ? width : height;
-	  larger = width > height ? width : height;
-	  size = 20;
-	  margin = .1;
-	  port = 1 - margin;
-	  transform_matrix = [smaller, 0, 0, 0, smaller, 0, 1 / width, 1 / height, 1];
-	  board_transform = [1, 0, 0, 0, 1, 0, (width / 2) - ((port * smaller) / 2), (height / 2) - ((port * smaller) / 2), 1];
-	  composed_transform = mat3.multiply(mat3.create(), board_transform, transform_matrix);
-	  return {
-	    margin: margin,
-	    size: size,
-	    smaller: smaller,
-	    height: height,
-	    width: width,
-	    tMat: composed_transform
-	  };
-	};
-
-	map_dispatch_to_props = function(dispatch, own_props) {
-	  return {};
-	};
-
-	module.exports = minesweeper_container = connect(map_state_to_props, map_dispatch_to_props)(minesweeper);
-
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, minesweeper, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
-
-	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
-
-	PureRenderMixin = __webpack_require__(309);
-
-	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
-
-	textArea = React.createFactory('textArea');
-
-	filter = React.createFactory('filter');
-
-	foreignObject = React.createFactory('foreignObject');
-
-	feGaussianBlur = React.createFactory('feGaussianBlur');
-
-	feImage = React.createFactory('feImage');
-
-	feOffset = React.createFactory('feOffset');
-
-	module.exports = minesweeper = rr({
-	  mixins: [PureRenderMixin],
-	  rect_t: function(s_rect) {
-	    var height, origin, width, x, y;
-	    width = s_rect.width, height = s_rect.height, x = s_rect.x, y = s_rect.y;
-	    origin = vec2.transformMat3(vec2.create(), [x, y], this.props.tMat);
-	    return {
-	      x: origin[0],
-	      y: origin[1],
-	      width: width * this.props.tMat[0],
-	      height: height * this.props.tMat[4]
-	    };
-	  },
-	  rect_l_t: function(s_rect, l_tMat) {
-	    var height, origin, width, x, y;
-	    width = s_rect.width, height = s_rect.height, x = s_rect.x, y = s_rect.y;
-	    origin = vec2.transformMat3(vec2.create(), [x, y], l_tMat);
-	    return {
-	      x: origin[0],
-	      y: origin[1],
-	      width: width * l_tMat[0],
-	      height: height * l_tMat[4]
-	    };
-	  },
-	  tile_000: function(l_tMat) {
-	    var s_rect;
-	    s_rect = {
-	      width: 1,
-	      height: 1,
-	      x: 0,
-	      y: 0
-	    };
-	    return this.rect_l_t(s_rect, l_tMat);
-	  },
-	  tile_transforms: function() {
-	    var i, idx, jdx, port, ref2, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
-	    smaller = this.props.tMat[0];
-	    port = 1 - this.props.margin;
-	    tile_size = port / this.props.size;
-	    results = [];
-	    for (idx = i = 0, ref2 = this.props.size - 1; 0 <= ref2 ? i <= ref2 : i >= ref2; idx = 0 <= ref2 ? ++i : --i) {
-	      results.push((function() {
-	        var j, ref3, results1;
-	        results1 = [];
-	        for (jdx = j = 0, ref3 = this.props.size - 1; 0 <= ref3 ? j <= ref3 : j >= ref3; jdx = 0 <= ref3 ? ++j : --j) {
-	          x_displacement = jdx * tile_size;
-	          y_displacement = idx * tile_size;
-	          results1.push(transform_matrix = [tile_size, 0, 0, 0, tile_size, 0, x_displacement, y_displacement, 1]);
-	        }
-	        return results1;
-	      }).call(this));
-	    }
-	    return results;
-	  },
-	  render: function() {
-	    var color, f1_x, f1_y, idx, jdx, l_tMat, row, std_dev, tile, tile_0, transforms;
-	    transforms = this.tile_transforms();
-	    return svg({
-	      width: '100%',
-	      height: '100%'
-	    }, f1_x = .005 * this.props.tMat[0], f1_y = .005 * this.props.tMat[4], std_dev = .001 * this.props.tMat[0], defs, radialGradient({
-	      id: "rGrad_001"
-	    }, stop({
-	      offset: "30%",
-	      stopColor: 'lightgrey'
-	    }), stop({
-	      offset: "70%",
-	      stopColor: "blue"
-	    }), stop({
-	      offset: "95%",
-	      stopColor: "lightblue"
-	    })), filter({
-	      id: 'f1'
-	    }, feGaussianBlur({
-	      "in": "SourceGraphic",
-	      result: "blurOut",
-	      stdDeviation: std_dev
-	    }), feOffset({
-	      "in": "blurOut",
-	      result: "dropBlur",
-	      dx: f1_x,
-	      dy: f1_y
-	    })), (function() {
-	      var i, len, results;
-	      results = [];
-	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {
-	        row = transforms[idx];
-	        results.push((function() {
-	          var j, len1, results1;
-	          results1 = [];
-	          for (jdx = j = 0, len1 = row.length; j < len1; jdx = ++j) {
-	            l_tMat = row[jdx];
-	            switch (((idx * jdx) + idx) % 5) {
-	              case 0:
-	                color = 'white';
-	                break;
-	              case 1:
-	                color = 'blue';
-	                break;
-	              case 2:
-	                color = 'orange';
-	                break;
-	              case 3:
-	                color = 'purple';
-	                break;
-	              case 4:
-	                color = 'green';
-	            }
-	            tile_0 = this.tile_000(l_tMat);
-	            tile = this.rect_t(tile_0);
-	            results1.push(rect({
-	              x: tile.x,
-	              y: tile.y,
-	              width: tile.width,
-	              height: tile.height,
-	              fill: 'url(#rGrad_001)',
-	              stroke: 'blue'
-	            }));
-	          }
-	          return results1;
-	        }).call(this));
-	      }
-	      return results;
-	    }).call(this));
-	  }
-	});
-
-
-/***/ },
-/* 309 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(310);
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactComponentWithPureRenderMixin
-	 */
-
-	'use strict';
-
-	var shallowCompare = __webpack_require__(311);
-
-	/**
-	 * If your React component's render function is "pure", e.g. it will render the
-	 * same result given the same props and state, provide this mixin for a
-	 * considerable performance boost.
-	 *
-	 * Most React components have pure render functions.
-	 *
-	 * Example:
-	 *
-	 *   var ReactComponentWithPureRenderMixin =
-	 *     require('ReactComponentWithPureRenderMixin');
-	 *   React.createClass({
-	 *     mixins: [ReactComponentWithPureRenderMixin],
-	 *
-	 *     render: function() {
-	 *       return <div className={this.props.className}>foo</div>;
-	 *     }
-	 *   });
-	 *
-	 * Note: This only checks shallow equality for props and state. If these contain
-	 * complex data structures this mixin may have false-negatives for deeper
-	 * differences. Only mixin to components which have simple props and state, or
-	 * use `forceUpdate()` when you know deep data structures have changed.
-	 *
-	 * See https://facebook.github.io/react/docs/pure-render-mixin.html
-	 */
-	var ReactComponentWithPureRenderMixin = {
-	  shouldComponentUpdate: function (nextProps, nextState) {
-	    return shallowCompare(this, nextProps, nextState);
-	  }
-	};
-
-	module.exports = ReactComponentWithPureRenderMixin;
-
-/***/ },
 /* 311 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	* @providesModule shallowCompare
-	*/
-
-	'use strict';
-
-	var shallowEqual = __webpack_require__(131);
-
-	/**
-	 * Does a shallow comparison for props and state.
-	 * See ReactComponentWithPureRenderMixin
-	 * See also https://facebook.github.io/react/docs/shallow-compare.html
-	 */
-	function shallowCompare(instance, nextProps, nextState) {
-	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
-	}
-
-	module.exports = shallowCompare;
-
-/***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _, c, initial_state, ref;
-
-	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
-
-	module.exports = initial_state = function(arg) {
-	  var height, minesweeper, ui_base, width;
-	  width = arg.width, height = arg.height;
-	  ui_base = __webpack_require__(313)({
-	    width: width,
-	    height: height
-	  });
-	  minesweeper = __webpack_require__(314)();
-	  return _.assign(ui_base, minesweeper);
-	};
-
-
-/***/ },
-/* 313 */
-/***/ function(module, exports) {
-
-	var ui_base;
-
-	module.exports = ui_base = function(arg) {
-	  var height, width;
-	  width = arg.width, height = arg.height;
-	  return {
-	    routing: '/',
-	    viewport_width: width,
-	    viewport_height: height
-	  };
-	};
-
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var FINISHED, FLAGGED, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEALED, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, c, lay_mines, mine_and_salt_water, ref, ref1, ref2;
-
-	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
-
-	ref1 = __webpack_require__(315), NOT_STARTED = ref1.NOT_STARTED, IN_PROGRESS = ref1.IN_PROGRESS, FINISHED = ref1.FINISHED;
-
-	ref2 = __webpack_require__(316), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
-
-	lay_mines = function(size, acc, mined_probability) {
-	  var i, idx, j, jdx, ref3, ref4;
-	  if (size == null) {
-	    size = 20;
-	  }
-	  if (acc == null) {
-	    acc = {};
-	  }
-	  if (mined_probability == null) {
-	    mined_probability = .23;
-	  }
-	  for (idx = i = 0, ref3 = size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
-	    for (jdx = j = 0, ref4 = size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
-	      if (Math.random() < mined_probability) {
-	        acc[TILE + ":" + idx + ":" + jdx] = MINED;
-	      } else {
-	        acc[TILE + ":" + idx + ":" + jdx] = UNMINED;
-	      }
-	    }
-	  }
-	  return acc;
-	};
-
-	mine_and_salt_water = function(size, acc) {
-	  var arq, counter, i, idx, j, jdx, number, ref3, ref4;
-	  if (size == null) {
-	    size = 20;
-	  }
-	  if (acc == null) {
-	    acc = {};
-	  }
-	  arq = lay_mines(size, {});
-	  for (idx = i = 0, ref3 = size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
-	    for (jdx = j = 0, ref4 = size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
-	      if (arq[TILE + ":" + idx + ":" + jdx] === UNMINED) {
-	        counter = 0;
-	        if (idx > 0) {
-	          if (arq[TILE + ":" + (idx - 1) + ":" + jdx] === MINED) {
-	            counter++;
-	          }
-	          if (jdx > 0) {
-	            if (arq[TILE + ":" + (idx - 1) + ":" + (jdx - 1)] === MINED) {
-	              counter++;
-	            }
-	          }
-	          if (jdx < (size - 1)) {
-	            if (arq[TILE + ":" + (idx - 1) + ":" + (jdx + 1)] === MINED) {
-	              counter++;
-	            }
-	          }
-	        }
-	        if (idx < (size - 1)) {
-	          if (arq[TILE + ":" + (idx + 1) + ":" + jdx] === MINED) {
-	            counter++;
-	          }
-	          if (jdx > 0) {
-	            if (arq[TILE + ":" + (idx + 1) + ":" + (jdx - 1)] === MINED) {
-	              counter++;
-	            }
-	          }
-	          if (jdx < (size - 1)) {
-	            if (arq[TILE + ":" + (idx + 1) + ":" + (jdx + 1)] === MINED) {
-	              counter++;
-	            }
-	          }
-	        }
-	        if (jdx > 0) {
-	          if (arq[TILE + ":" + idx + ":" + (jdx - 1)] === MINED) {
-	            counter++;
-	          }
-	        }
-	        if (jdx < (size - 1)) {
-	          if (arq[TILE + ":" + idx + ":" + (jdx + 1)] === MINED) {
-	            counter++;
-	          }
-	        }
-	        number = (function() {
-	          switch (counter) {
-	            case 0:
-	              return UNMINED_ZERO_MINE_NEIGHBORS;
-	            case 1:
-	              return UNMINED_ONE_MINE_NEIGHBOR;
-	            case 2:
-	              return UNMINED_TWO_MINE_NEIGHBORS;
-	            case 3:
-	              return UNMINED_THREE_MINE_NEIGHBORS;
-	            case 4:
-	              return UNMINED_FOUR_MINE_NEIGHBORS;
-	            case 5:
-	              return UNMINED_FIVE_MINE_NEIGHBORS;
-	            case 6:
-	              return UNMINED_SIX_MINE_NEIGHBORS;
-	            case 7:
-	              return UNMINED_SEVEN_MINE_NEIGHBORS;
-	            case 8:
-	              return UNMINED_EIGHT_MINE_NEIGHBORS;
-	          }
-	        })();
-	        acc[TILE + ":" + idx + ":" + jdx] = number + ":" + NOT_REVEALED + ":" + NOT_FLAGGED;
-	      } else if (arq[TILE + ":" + idx + ":" + jdx] === MINED) {
-	        acc[TILE + ":" + idx + ":" + jdx] = MINED + ":" + NOT_REVEALED + ":" + NOT_FLAGGED;
-	      } else {
-	        throw "problem in salt water";
-	      }
-	    }
-	  }
-	  return acc;
-	};
-
-	module.exports = function(size) {
-	  var game_meta, starting_board;
-	  if (size == null) {
-	    size = 4;
-	  }
-	  starting_board = mine_and_salt_water(size);
-	  game_meta = {
-	    TIME_ELAPSED: 0,
-	    GAME_STATE: NOT_STARTED,
-	    SIZE: size
-	  };
-	  return _.assign(game_meta, starting_board);
-	};
-
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var keymirror, minesweeper_game_states;
-
-	keymirror = __webpack_require__(286);
-
-	module.exports = minesweeper_game_states = keymirror({
-	  GAME_STATE: null,
-	  NOT_STARTED: null,
-	  IN_PROGRESS: null,
-	  FINISHED: null,
-	  TIME_ELAPSED: null
-	});
-
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var keymirror, tile_states;
-
-	keymirror = __webpack_require__(286);
-
-	module.exports = tile_states = keymirror({
-	  TILE: null,
-	  FLAGGED: null,
-	  NOT_FLAGGED: null,
-	  MINED: null,
-	  UNMINED: null,
-	  UNMINED_ZERO_MINE_NEIGHBORS: null,
-	  UNMINED_ONE_MINE_NEIGHBOR: null,
-	  UNMINED_TWO_MINE_NEIGHBORS: null,
-	  UNMINED_THREE_MINE_NEIGHBORS: null,
-	  UNMINED_FOUR_MINE_NEIGHBORS: null,
-	  UNMINED_FIVE_MINE_NEIGHBORS: null,
-	  UNMINED_SIX_MINE_NEIGHBORS: null,
-	  UNMINED_SEVEN_MINE_NEIGHBORS: null,
-	  UNMINED_EIGHT_MINE_NEIGHBORS: null,
-	  REVEALED: null,
-	  NOT_REVEALED: null
-	});
-
-
-/***/ },
-/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var REVEAL, START_NEW_GAME, TOGGLE_FLAG, _, c, game_generics_reducer_factory, ref, ref1, tile_reducer_factory;
 
 	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
 
-	ref1 = __webpack_require__(318), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG;
+	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG;
 
 	tile_reducer_factory = function(arg) {
 	  var idx, initial_state, jdx, tile_reducer;
@@ -59729,7 +59440,7 @@
 
 
 /***/ },
-/* 318 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var keymirror, minesweeper_action_types;
@@ -59740,6 +59451,436 @@
 	  START_NEW_GAME: null,
 	  REVEAL: null,
 	  TOGGLE_FLAG: null
+	});
+
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React, React_DOM, _, assign, c, connect, gl_mat, grab_board, keys, map_dispatch_to_props, map_state_to_props, mat3, mine_000, minesweeper, minesweeper_container, ref, ref1, reveal, rr, shortid, start_new_game, toggle_flag, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	connect = __webpack_require__(197).connect;
+
+	ref1 = __webpack_require__(314), start_new_game = ref1.start_new_game, reveal = ref1.reveal, toggle_flag = ref1.toggle_flag;
+
+	minesweeper = __webpack_require__(315);
+
+	mine_000 = __webpack_require__(319);
+
+	grab_board = function(state) {};
+
+	map_state_to_props = function(state, own_props) {
+	  var GAME_STATE, SIZE, TIME_ELAPSED, arq_0, board_transform, composed_transform, height, larger, margin, obj_0, obj_1, obj_2, obj_3, port, size, smaller, transform_matrix, width;
+	  grab_board(state);
+	  obj_0 = state.toJS();
+	  obj_1 = state.toObject();
+	  obj_3 = _.pick(obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED', 'routing', 'viewport_width', 'viewport_height']);
+	  obj_2 = _.omit(obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED']);
+	  SIZE = obj_2.SIZE, GAME_STATE = obj_2.GAME_STATE, TIME_ELAPSED = obj_2.TIME_ELAPSED;
+	  width = state.get('viewport_width');
+	  height = state.get('viewport_height');
+	  smaller = width < height ? width : height;
+	  larger = width > height ? width : height;
+	  size = state.get('SIZE');
+	  margin = .1;
+	  port = 1 - margin;
+	  transform_matrix = [smaller, 0, 0, 0, smaller, 0, 1 / width, 1 / height, 1];
+	  board_transform = [1, 0, 0, 0, 1, 0, (width / 2) - ((port * smaller) / 2), (height / 2) - ((port * smaller) / 2), 1];
+	  composed_transform = mat3.multiply(mat3.create(), board_transform, transform_matrix);
+	  arq_0 = {
+	    SIZE: SIZE,
+	    GAME_STATE: GAME_STATE,
+	    TIME_ELAPSED: TIME_ELAPSED,
+	    board: obj_2,
+	    margin: margin,
+	    size: size,
+	    smaller: smaller,
+	    height: height,
+	    width: width,
+	    tMat: composed_transform
+	  };
+	  return arq_0;
+	};
+
+	map_dispatch_to_props = function(dispatch, own_props) {
+	  return {};
+	};
+
+	module.exports = minesweeper_container = connect(map_state_to_props, map_dispatch_to_props)(minesweeper);
+
+
+/***/ },
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var REVEAL, START_NEW_GAME, TOGGLE_FLAG, _, c, ref, ref1, reveal, start_new_game, toggle_flag;
+
+	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
+
+	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG;
+
+	start_new_game = function() {
+	  return c('start new game');
+	};
+
+	reveal = function(tile_coord) {
+	  return c('reveal tile at coord', tile_coord);
+	};
+
+	toggle_flag = function(tile_coord) {
+	  return c('toggle_flag at coord', tile_coord);
+	};
+
+	module.exports = {
+	  start_new_game: start_new_game,
+	  reveal: reveal,
+	  toggle_flag: toggle_flag
+	};
+
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, mine_000, minesweeper, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	mine_000 = __webpack_require__(319);
+
+	module.exports = minesweeper = rr({
+	  mixins: [PureRenderMixin],
+	  rect_t: function(s_rect) {
+	    var height, origin, width, x, y;
+	    width = s_rect.width, height = s_rect.height, x = s_rect.x, y = s_rect.y;
+	    origin = vec2.transformMat3(vec2.create(), [x, y], this.props.tMat);
+	    return {
+	      x: origin[0],
+	      y: origin[1],
+	      width: width * this.props.tMat[0],
+	      height: height * this.props.tMat[4]
+	    };
+	  },
+	  rect_l_t: function(s_rect, l_tMat) {
+	    var height, origin, width, x, y;
+	    width = s_rect.width, height = s_rect.height, x = s_rect.x, y = s_rect.y;
+	    origin = vec2.transformMat3(vec2.create(), [x, y], l_tMat);
+	    return {
+	      x: origin[0],
+	      y: origin[1],
+	      width: width * l_tMat[0],
+	      height: height * l_tMat[4]
+	    };
+	  },
+	  tile_000: function(l_tMat) {
+	    var s_rect;
+	    s_rect = {
+	      width: 1,
+	      height: 1,
+	      x: 0,
+	      y: 0
+	    };
+	    return this.rect_l_t(s_rect, l_tMat);
+	  },
+	  tile_transforms: function() {
+	    var i, idx, jdx, port, ref2, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
+	    smaller = this.props.tMat[0];
+	    port = 1 - this.props.margin;
+	    tile_size = port / this.props.size;
+	    results = [];
+	    for (idx = i = 0, ref2 = this.props.size - 1; 0 <= ref2 ? i <= ref2 : i >= ref2; idx = 0 <= ref2 ? ++i : --i) {
+	      results.push((function() {
+	        var j, ref3, results1;
+	        results1 = [];
+	        for (jdx = j = 0, ref3 = this.props.size - 1; 0 <= ref3 ? j <= ref3 : j >= ref3; jdx = 0 <= ref3 ? ++j : --j) {
+	          x_displacement = jdx * tile_size;
+	          y_displacement = idx * tile_size;
+	          results1.push(transform_matrix = [tile_size, 0, 0, 0, tile_size, 0, x_displacement, y_displacement, 1]);
+	        }
+	        return results1;
+	      }).call(this));
+	    }
+	    return results;
+	  },
+	  render: function() {
+	    var actual, f1_x, f1_y, flagged, idx, j_tMat, jdx, l_tMat, revealed, row, std_dev, tile, tile_0, tile_000, transforms;
+	    transforms = this.tile_transforms();
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, f1_x = .005 * this.props.tMat[0], f1_y = .005 * this.props.tMat[4], std_dev = .001 * this.props.tMat[0], defs, radialGradient({
+	      id: "rGrad_001"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "blue"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "lightblue"
+	    })), filter({
+	      id: 'f1'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f1_x,
+	      dy: f1_y
+	    })), (function() {
+	      var i, len, results;
+	      results = [];
+	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {
+	        row = transforms[idx];
+	        results.push((function() {
+	          var j, len1, ref2, results1;
+	          results1 = [];
+	          for (jdx = j = 0, len1 = row.length; j < len1; jdx = ++j) {
+	            l_tMat = row[jdx];
+	            tile_000 = this.props.board["TILE:" + idx + ":" + jdx];
+	            ref2 = tile_000.split(':'), actual = ref2[0], revealed = ref2[1], flagged = ref2[2];
+	            tile_0 = this.tile_000(l_tMat);
+	            tile = this.rect_t(tile_0);
+	            j_tMat = mat3.multiply(mat3.create(), this.props.tMat, l_tMat);
+	            results1.push(mine_000({
+	              tMat: j_tMat
+	            }));
+	          }
+	          return results1;
+	        }).call(this));
+	      }
+	      return results;
+	    }).call(this));
+	  }
+	});
+
+
+/***/ },
+/* 316 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(317);
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactComponentWithPureRenderMixin
+	 */
+
+	'use strict';
+
+	var shallowCompare = __webpack_require__(318);
+
+	/**
+	 * If your React component's render function is "pure", e.g. it will render the
+	 * same result given the same props and state, provide this mixin for a
+	 * considerable performance boost.
+	 *
+	 * Most React components have pure render functions.
+	 *
+	 * Example:
+	 *
+	 *   var ReactComponentWithPureRenderMixin =
+	 *     require('ReactComponentWithPureRenderMixin');
+	 *   React.createClass({
+	 *     mixins: [ReactComponentWithPureRenderMixin],
+	 *
+	 *     render: function() {
+	 *       return <div className={this.props.className}>foo</div>;
+	 *     }
+	 *   });
+	 *
+	 * Note: This only checks shallow equality for props and state. If these contain
+	 * complex data structures this mixin may have false-negatives for deeper
+	 * differences. Only mixin to components which have simple props and state, or
+	 * use `forceUpdate()` when you know deep data structures have changed.
+	 *
+	 * See https://facebook.github.io/react/docs/pure-render-mixin.html
+	 */
+	var ReactComponentWithPureRenderMixin = {
+	  shouldComponentUpdate: function (nextProps, nextState) {
+	    return shallowCompare(this, nextProps, nextState);
+	  }
+	};
+
+	module.exports = ReactComponentWithPureRenderMixin;
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	* @providesModule shallowCompare
+	*/
+
+	'use strict';
+
+	var shallowEqual = __webpack_require__(131);
+
+	/**
+	 * Does a shallow comparison for props and state.
+	 * See ReactComponentWithPureRenderMixin
+	 * See also https://facebook.github.io/react/docs/shallow-compare.html
+	 */
+	function shallowCompare(instance, nextProps, nextState) {
+	  return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
+	}
+
+	module.exports = shallowCompare;
+
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, mine, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = mine = rr({
+	  probe_000: function(aa) {
+	    var path_commands, transform_000, transform_001, transform_post, transform_pre, x_0, y_0, z;
+	    path_commands = [['M', .5, .49], ['L', .8, .49], ['L', .8, .51], ['L', .5, .51], ['Z']];
+	    a = ((2.0 * Math.PI) / 12) * parseFloat(aa);
+	    x_0 = aa * .3;
+	    y_0 = aa * -.1;
+	    transform_000 = [Math.cos(a), -(Math.sin(a)), 0, Math.sin(a), Math.cos(a), 0, 0.0, 0.0, 1.0];
+	    transform_000 = mat3.transpose(mat3.create(), transform_000);
+	    transform_pre = [1, 0, 0, 0, 1, 0, -.5, -.5, 1];
+	    transform_post = [1, 0, 0, 0, 1, 0, .5, .5, 1];
+	    transform_001 = [1.0, 0.0, Math.cos(a) * .25, 0.0, 1.0, Math.sin(a) * .25, 0.0, 0.0, 1.0];
+	    transform_001 = mat3.transpose(mat3.create(), transform_001);
+	    z = path_commands.reduce((function(_this) {
+	      return function(acc, i) {
+	        var i_vec, space, t_0, t_1, t_off, t_post, t_pre;
+	        space = path_commands.indexOf(i) === (path_commands.length - 1) ? "" : " ";
+	        switch (i[0]) {
+	          case 'M':
+	          case 'L':
+	            i_vec = [i[1], i[2]];
+	            t_pre = vec2.transformMat3(vec2.create(), i_vec, transform_pre);
+	            t_0 = vec2.transformMat3(vec2.create(), t_pre, transform_000);
+	            t_off = vec2.transformMat3(vec2.create(), t_0, transform_001);
+	            t_post = vec2.transformMat3(vec2.create(), t_off, transform_post);
+	            t_1 = vec2.transformMat3(vec2.create(), t_post, _this.props.tMat);
+	            return acc + ("" + i[0] + t_1[0] + " " + t_1[1] + space);
+	          case 'Z':
+	            return acc + 'Z';
+	        }
+	      };
+	    })(this), "");
+	    return z;
+	  },
+	  render: function() {
+	    var f1_x, f1_y, i, i_r, i_r_001, iv, o_r, o_r_001, ov, std_dev;
+	    iv = [0.5, 0.5];
+	    f1_x = .5 * this.props.tMat[0];
+	    f1_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[4];
+	    i_r = .45;
+	    o_r = i_r * this.props.tMat[0];
+	    i_r_001 = .35;
+	    o_r_001 = i_r_001 * this.props.tMat[0];
+	    ov = vec2.transformMat3(vec2.create(), iv, this.props.tMat);
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "rGrad_009"
+	    }, stop({
+	      offset: "80%",
+	      stopColor: "gold"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "purple"
+	    })), filter({
+	      id: 'f2'
+	    }, feGaussianBlur({
+	      "in": "SourceAlpha",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f1_x,
+	      dy: f1_y
+	    })), circle({
+	      cx: ov[0],
+	      cy: ov[1],
+	      r: o_r_001,
+	      fill: 'url(#rGrad_009)'
+	    }), circle({
+	      cx: ov[0],
+	      cy: ov[1],
+	      r: o_r,
+	      filter: 'url(#f2)'
+	    }), (function() {
+	      var j, results;
+	      results = [];
+	      for (i = j = 0; j <= 11; i = ++j) {
+	        results.push(path({
+	          key: "probe" + i,
+	          fill: 'white',
+	          d: this.probe_000(i),
+	          stroke: 'white'
+	        }));
+	      }
+	      return results;
+	    }).call(this));
+	  }
 	});
 
 

@@ -13,6 +13,8 @@ feOffset = React.createFactory 'feOffset'
 
 # font_awesome = require 'react-fontawesome'
 
+mine_000 = require './mine_000_.coffee'
+
 module.exports = minesweeper = rr
 
     mixins: [PureRenderMixin]
@@ -63,7 +65,6 @@ module.exports = minesweeper = rr
 
 
     render: ->
-
         transforms = @tile_transforms()
 
         svg
@@ -102,25 +103,26 @@ module.exports = minesweeper = rr
 
             for row, idx in transforms
                 for l_tMat, jdx in row
-                    switch ((idx * jdx) + idx) % 5
-                        when 0
-                            color = 'white'
-                        when 1
-                            color = 'blue'
-                        when 2
-                            color = 'orange'
-                        when 3
-                            color = 'purple'
-                        when 4
-                            color = 'green'
+                    tile_000 = @props.board["TILE:#{idx}:#{jdx}"]
+                    [actual, revealed, flagged] = tile_000.split ':'
+
+                    # color = switch ((idx * jdx) + idx) % 5
+                    #     when 0 then 'white'
+                    #     when 1 then 'blue'
+                    #     when 2 then 'orange'
+                    #     when 3 then 'purple'
+                    #     when 4 then 'green'
                     tile_0 = @tile_000 l_tMat
                     tile = @rect_t tile_0
-                    rect
-                        x: tile.x
-                        y: tile.y
-                        width: tile.width
-                        height: tile.height
-                        # fill: color
-                        # filter: 'url(#f1)'
-                        fill: 'url(#rGrad_001)'
-                        stroke: 'blue'
+                    j_tMat = mat3.multiply mat3.create(), @props.tMat, l_tMat
+                    # rect
+                    #     x: tile.x
+                    #     y: tile.y
+                    #     width: tile.width
+                    #     height: tile.height
+                    #     # fill: color
+                    #     # filter: 'url(#f1)'
+                    #     fill: 'url(#rGrad_001)'
+                    #     stroke: 'blue'
+                    mine_000
+                        tMat: j_tMat

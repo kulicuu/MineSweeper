@@ -54,7 +54,7 @@ mine_and_salt_water = (size = 20, acc = {}) ->
                 throw "problem in salt water"
     return acc
 
-module.exports = ( size = 4 ) ->
+module.exports = ( size = 20 ) ->
 
     starting_board = mine_and_salt_water(size)
 
