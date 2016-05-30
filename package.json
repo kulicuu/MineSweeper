@@ -26,6 +26,7 @@
         "redux-immutable": "latest",
         "redux-logger": "latest",
         "redux-promise": "latest",
+        "redux-saga": "latest",
         "redux-thunk": "latest",
         "style-loader": "^0.13.0",
         "ws": "latest"

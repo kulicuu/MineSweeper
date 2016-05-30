@@ -52,10 +52,10 @@ module.exports = eight = rr
                         stopColor: 'lightgrey'
                     stop
                         offset:"70%"
-                        stopColor: @state.stop_1? or 'black'
+                        stopColor: 'black'
                     stop
                         offset:"95%"
-                        stopColor:@state.stop_2? or 'white'
+                        stopColor:'white'
                 filter
                     id: 'f_zero'
                     feGaussianBlur

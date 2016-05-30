@@ -41,8 +41,6 @@ module.exports = seven = rr
         # r_001 = M[0][0] * r_000
         r_001 = @props.tMat[0] * r_000
 
-
-
         svg
             width: '100%'
             height: '100%'
@@ -54,10 +52,10 @@ module.exports = seven = rr
                         stopColor: 'lightgrey'
                     stop
                         offset:"70%"
-                        stopColor: @state.stop_1 or 'purple'
+                        stopColor: 'purple'
                     stop
                         offset:"95%"
-                        stopColor:@state.stop_2 or 'white'
+                        stopColor: 'white'
                 filter
                     id: 'f_zero'
                     feGaussianBlur

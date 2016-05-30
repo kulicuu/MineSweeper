@@ -6,15 +6,14 @@
 
 { START_NEW_GAME, REVEAL, TOGGLE_FLAG } = require '../constants/minesweeper_actions_000_.coffee'
 
+{ TILE, FLAGGED, NOT_FLAGGED, MINED, UNMINED, UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED, NOT_REVEALED } = require '../constants/tile_states.coffee'
+
 tile_reducer_factory = ({idx, jdx, initial_state}) ->
     tile_reducer = (prev_state = initial_state, action) ->
-        # c 'lets see prev_state anyway', prev_state
-        if (action.type is REVEAL) and (payload is "TILE:#{idx}:#{jdx}")
-            sparc = prev_state
-            c 'sparc', sparc
-            return prev_state
+        [is_mined, is_revealed, is_flagged] = prev_state.split ':'
+        if (action.type is REVEAL) and (action.payload is "TILE:#{idx}:#{jdx}") and (is_revealed is NOT_REVEALED)
+            return [is_mined, REVEALED, is_flagged].join(':')
         else
-            # c 'got else'
             return prev_state
     return tile_reducer
 

@@ -77,7 +77,11 @@ map_state_to_props = (state, own_props) ->
     return arq_0
 
 map_dispatch_to_props = (dispatch, own_props) ->
-    return {}
+    c 'own_props', own_props
+    return {
+        reveal: (tile_coord) ->
+            dispatch(reveal(tile_coord))
+    }
 
 module.exports = minesweeper_container = connect(map_state_to_props, map_dispatch_to_props)(minesweeper)
 # module.exports = sketch_container = connect(map_state_to_props, map_dispatch_to_props)(one_000)

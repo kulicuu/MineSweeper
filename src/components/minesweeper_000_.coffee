@@ -114,57 +114,61 @@ module.exports = minesweeper = rr
 
             for row, idx in transforms
                 for l_tMat, jdx in row
-                    tile_000 = @props.board["TILE:#{idx}:#{jdx}"]
-                    [actual, revealed, flagged] = tile_000.split ':'
+                    do (idx, jdx) =>
+                        tile_000 = @props.board["TILE:#{idx}:#{jdx}"]
+                        [actual, revealed, flagged] = tile_000.split ':'
 
-                    # color = switch ((idx * jdx) + idx) % 5
-                    #     when 0 then 'white'
-                    #     when 1 then 'blue'
-                    #     when 2 then 'orange'
-                    #     when 3 then 'purple'
-                    #     when 4 then 'green'
-                    tile_0 = @tile_000 l_tMat
-                    tile = @rect_t tile_0
-                    j_tMat = mat3.multiply mat3.create(), @props.tMat, l_tMat
-
-                    switch actual
-                        when MINED
-                            mine_000
-                                tMat: j_tMat
-                        when UNMINED_ZERO_MINE_NEIGHBORS
-                            zero_000
-                                tMat: j_tMat
-                        when UNMINED_ONE_MINE_NEIGHBOR
-                            one_000
-                                tMat: j_tMat
-                        when UNMINED_TWO_MINE_NEIGHBORS
-                            two_000
-                                tMat: j_tMat
-                        when UNMINED_THREE_MINE_NEIGHBORS
-                            three_000
-                                tMat: j_tMat
-                        when UNMINED_FOUR_MINE_NEIGHBORS
-                            four_000
-                                tMat: j_tMat
-                        when UNMINED_FIVE_MINE_NEIGHBORS
-                            five_000
-                                tMat: j_tMat
-                        # when UNMINED_SIX_MINE_NEIGHBORS
-                        #     six_000
-                        #         tMat: j_tMat
-                        # when UNMINED_SEVEN_MINE_NEIGHBORS
-                        #     seven_000
-                        #         tMat: j_tMat
-                        # when UNMINED_EIGHT_MINE_NEIGHBORS
-                        #     eight_000
-                        #         tMat: j_tMat
-                        else
-                            rect
-                                x: tile.x
-                                y: tile.y
-                                width: tile.width
-                                height: tile.height
-                                # fill: color
-                                # filter: 'url(#f1)'
-                                fill: 'url(#rGrad_001)'
-                                stroke: 'blue'
+                        # color = switch ((idx * jdx) + idx) % 5
+                        #     when 0 then 'white'
+                        #     when 1 then 'blue'
+                        #     when 2 then 'orange'
+                        #     when 3 then 'purple'
+                        #     when 4 then 'green'
+                        tile_0 = @tile_000 l_tMat
+                        tile = @rect_t tile_0
+                        j_tMat = mat3.multiply mat3.create(), @props.tMat, l_tMat
+                        switch revealed
+                            when NOT_REVEALED
+                                rect
+                                    key: "tile:#{idx}:#{jdx}"
+                                    x: tile.x
+                                    y: tile.y
+                                    width: tile.width
+                                    height: tile.height
+                                    # fill: color
+                                    # filter: 'url(#f1)'
+                                    fill: 'url(#rGrad_001)'
+                                    stroke: 'blue'
+                                    onClick: => @props.reveal("#{TILE}:#{idx}:#{jdx}")
+                            when REVEALED
+                                switch actual
+                                    when MINED
+                                        mine_000
+                                            tMat: j_tMat
+                                    when UNMINED_ZERO_MINE_NEIGHBORS
+                                        zero_000
+                                            tMat: j_tMat
+                                    when UNMINED_ONE_MINE_NEIGHBOR
+                                        one_000
+                                            tMat: j_tMat
+                                    when UNMINED_TWO_MINE_NEIGHBORS
+                                        two_000
+                                            tMat: j_tMat
+                                    when UNMINED_THREE_MINE_NEIGHBORS
+                                        three_000
+                                            tMat: j_tMat
+                                    when UNMINED_FOUR_MINE_NEIGHBORS
+                                        four_000
+                                            tMat: j_tMat
+                                    when UNMINED_FIVE_MINE_NEIGHBORS
+                                        five_000
+                                            tMat: j_tMat
+                                    when UNMINED_SIX_MINE_NEIGHBORS
+                                        six_000
+                                            tMat: j_tMat
+                                    when UNMINED_SEVEN_MINE_NEIGHBORS
+                                        seven_000
+                                            tMat: j_tMat
+                                    when UNMINED_EIGHT_MINE_NEIGHBORS
+                                        eight_000
+                                            tMat: j_tMat
