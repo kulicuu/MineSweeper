@@ -4,6 +4,7 @@
     "dependencies": {
         "coffee-script": "latest",
         "coffee-loader": "latest",
+        "express": "latest",
         "gl-matrix": "2.3.2",
         "immutable": "latest",
         "keymirror": "latest",
