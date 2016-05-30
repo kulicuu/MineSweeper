@@ -17,7 +17,7 @@ app.get '/', (req, res) ->
 app.use(body_parser.json())
 
 app.use(express.static(public_dir))
+port = process.env.PORT or 3000
 
-
-app.listen 3000, 'localhost', ->
-    c 'server listening on 3000'
+app.listen port, 'localhost', ->
+    c 'server listening on ', port
