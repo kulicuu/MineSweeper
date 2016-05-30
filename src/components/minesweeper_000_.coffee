@@ -4,6 +4,8 @@ PureRenderMixin = require 'react-addons-pure-render-mixin'
 
 {p, div, h1, h2, h3, h4, h5, h6, span, svg, circle, rect, ul, line, li, ol, code, a, input, defs, clipPath, body, linearGradient, stop, g, path, d, polygon, image, pattern, filter, feBlend, feOffset, polyline, feGaussianBlur, feMergeNode, feMerge, radialGradient, foreignObject, text, textArea, ellipse, pattern} = React.DOM
 
+{ TILE, FLAGGED, NOT_FLAGGED, MINED, UNMINED, UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED, NOT_REVEALED } = require '../constants/tile_states.coffee'
+
 textArea = React.createFactory 'textArea'
 filter = React.createFactory 'filter'
 foreignObject = React.createFactory 'foreignObject'
@@ -14,6 +16,15 @@ feOffset = React.createFactory 'feOffset'
 # font_awesome = require 'react-fontawesome'
 
 mine_000 = require './mine_000_.coffee'
+zero_000 = require './zero_000_.coffee'
+one_000 = require './one_000_.coffee'
+two_000 = require './two_000_.coffee'
+three_000 = require './three_000_.coffee'
+four_000 = require './four_000_.coffee'
+five_000 = require './five_000_.coffee'
+six_000 = require './six_000_.coffee'
+seven_000 = require './seven_000_.coffee'
+eight_000 = require './eight_000_.coffee'
 
 module.exports = minesweeper = rr
 
@@ -115,14 +126,45 @@ module.exports = minesweeper = rr
                     tile_0 = @tile_000 l_tMat
                     tile = @rect_t tile_0
                     j_tMat = mat3.multiply mat3.create(), @props.tMat, l_tMat
-                    # rect
-                    #     x: tile.x
-                    #     y: tile.y
-                    #     width: tile.width
-                    #     height: tile.height
-                    #     # fill: color
-                    #     # filter: 'url(#f1)'
-                    #     fill: 'url(#rGrad_001)'
-                    #     stroke: 'blue'
-                    mine_000
-                        tMat: j_tMat
+
+                    switch actual
+                        when MINED
+                            mine_000
+                                tMat: j_tMat
+                        when UNMINED_ZERO_MINE_NEIGHBORS
+                            zero_000
+                                tMat: j_tMat
+                        when UNMINED_ONE_MINE_NEIGHBOR
+                            one_000
+                                tMat: j_tMat
+                        when UNMINED_TWO_MINE_NEIGHBORS
+                            two_000
+                                tMat: j_tMat
+                        when UNMINED_THREE_MINE_NEIGHBORS
+                            three_000
+                                tMat: j_tMat
+                        when UNMINED_FOUR_MINE_NEIGHBORS
+                            four_000
+                                tMat: j_tMat
+                        when UNMINED_FIVE_MINE_NEIGHBORS
+                            five_000
+                                tMat: j_tMat
+                        # when UNMINED_SIX_MINE_NEIGHBORS
+                        #     six_000
+                        #         tMat: j_tMat
+                        # when UNMINED_SEVEN_MINE_NEIGHBORS
+                        #     seven_000
+                        #         tMat: j_tMat
+                        # when UNMINED_EIGHT_MINE_NEIGHBORS
+                        #     eight_000
+                        #         tMat: j_tMat
+                        else
+                            rect
+                                x: tile.x
+                                y: tile.y
+                                width: tile.width
+                                height: tile.height
+                                # fill: color
+                                # filter: 'url(#f1)'
+                                fill: 'url(#rGrad_001)'
+                                stroke: 'blue'

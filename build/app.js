@@ -59458,7 +59458,7 @@
 /* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React, React_DOM, _, assign, c, connect, gl_mat, grab_board, keys, map_dispatch_to_props, map_state_to_props, mat3, mine_000, minesweeper, minesweeper_container, ref, ref1, reveal, rr, shortid, start_new_game, toggle_flag, vec2, vec3;
+	var React, React_DOM, _, assign, c, connect, gl_mat, grab_board, keys, map_dispatch_to_props, map_state_to_props, mat3, mine_000, minesweeper, minesweeper_container, one_000, ref, ref1, reveal, rr, shortid, start_new_game, toggle_flag, vec2, vec3;
 
 	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
 
@@ -59469,6 +59469,8 @@
 	minesweeper = __webpack_require__(315);
 
 	mine_000 = __webpack_require__(319);
+
+	one_000 = __webpack_require__(320);
 
 	grab_board = function(state) {};
 
@@ -59545,13 +59547,15 @@
 /* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, mine_000, minesweeper, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+	var FLAGGED, MINED, NOT_FLAGGED, NOT_REVEALED, PureRenderMixin, REVEALED, React, React_DOM, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, a, assign, body, c, circle, clipPath, code, d, defs, div, eight_000, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, five_000, foreignObject, four_000, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, mine_000, minesweeper, ol, one_000, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, ref2, rr, seven_000, shortid, six_000, span, stop, svg, text, textArea, three_000, two_000, ul, vec2, vec3, zero_000;
 
 	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
 
 	PureRenderMixin = __webpack_require__(316);
 
 	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
 
 	textArea = React.createFactory('textArea');
 
@@ -59566,6 +59570,24 @@
 	feOffset = React.createFactory('feOffset');
 
 	mine_000 = __webpack_require__(319);
+
+	zero_000 = __webpack_require__(328);
+
+	one_000 = __webpack_require__(320);
+
+	two_000 = __webpack_require__(321);
+
+	three_000 = __webpack_require__(322);
+
+	four_000 = __webpack_require__(323);
+
+	five_000 = __webpack_require__(324);
+
+	six_000 = __webpack_require__(325);
+
+	seven_000 = __webpack_require__(326);
+
+	eight_000 = __webpack_require__(327);
 
 	module.exports = minesweeper = rr({
 	  mixins: [PureRenderMixin],
@@ -59602,16 +59624,16 @@
 	    return this.rect_l_t(s_rect, l_tMat);
 	  },
 	  tile_transforms: function() {
-	    var i, idx, jdx, port, ref2, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
+	    var i, idx, jdx, port, ref3, results, smaller, tile_size, transform_matrix, x_displacement, y_displacement;
 	    smaller = this.props.tMat[0];
 	    port = 1 - this.props.margin;
 	    tile_size = port / this.props.size;
 	    results = [];
-	    for (idx = i = 0, ref2 = this.props.size - 1; 0 <= ref2 ? i <= ref2 : i >= ref2; idx = 0 <= ref2 ? ++i : --i) {
+	    for (idx = i = 0, ref3 = this.props.size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
 	      results.push((function() {
-	        var j, ref3, results1;
+	        var j, ref4, results1;
 	        results1 = [];
-	        for (jdx = j = 0, ref3 = this.props.size - 1; 0 <= ref3 ? j <= ref3 : j >= ref3; jdx = 0 <= ref3 ? ++j : --j) {
+	        for (jdx = j = 0, ref4 = this.props.size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
 	          x_displacement = jdx * tile_size;
 	          y_displacement = idx * tile_size;
 	          results1.push(transform_matrix = [tile_size, 0, 0, 0, tile_size, 0, x_displacement, y_displacement, 1]);
@@ -59655,18 +59677,61 @@
 	      for (idx = i = 0, len = transforms.length; i < len; idx = ++i) {
 	        row = transforms[idx];
 	        results.push((function() {
-	          var j, len1, ref2, results1;
+	          var j, len1, ref3, results1;
 	          results1 = [];
 	          for (jdx = j = 0, len1 = row.length; j < len1; jdx = ++j) {
 	            l_tMat = row[jdx];
 	            tile_000 = this.props.board["TILE:" + idx + ":" + jdx];
-	            ref2 = tile_000.split(':'), actual = ref2[0], revealed = ref2[1], flagged = ref2[2];
+	            ref3 = tile_000.split(':'), actual = ref3[0], revealed = ref3[1], flagged = ref3[2];
 	            tile_0 = this.tile_000(l_tMat);
 	            tile = this.rect_t(tile_0);
 	            j_tMat = mat3.multiply(mat3.create(), this.props.tMat, l_tMat);
-	            results1.push(mine_000({
-	              tMat: j_tMat
-	            }));
+	            switch (actual) {
+	              case MINED:
+	                results1.push(mine_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_ZERO_MINE_NEIGHBORS:
+	                results1.push(zero_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_ONE_MINE_NEIGHBOR:
+	                results1.push(one_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_TWO_MINE_NEIGHBORS:
+	                results1.push(two_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_THREE_MINE_NEIGHBORS:
+	                results1.push(three_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_FOUR_MINE_NEIGHBORS:
+	                results1.push(four_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              case UNMINED_FIVE_MINE_NEIGHBORS:
+	                results1.push(five_000({
+	                  tMat: j_tMat
+	                }));
+	                break;
+	              default:
+	                results1.push(rect({
+	                  x: tile.x,
+	                  y: tile.y,
+	                  width: tile.width,
+	                  height: tile.height,
+	                  fill: 'url(#rGrad_001)',
+	                  stroke: 'blue'
+	                }));
+	            }
 	          }
 	          return results1;
 	        }).call(this));
@@ -59880,6 +59945,875 @@
 	      }
 	      return results;
 	    }).call(this));
+	  }
+	});
+
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, one, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = one = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    c('text_origin_out ', text_origin_out);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "one_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "lightgreen"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "yellow"
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      }
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#one_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      }
+	    }), text({
+	      style: {
+	        MozUserSelect: 'none'
+	      },
+	      cursor: 'default',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 1));
+	  }
+	});
+
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, two, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = two = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "two_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "yellow"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "orange"
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#two_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick
+	    }), text({
+	      style: {
+	        MozUserSelect: 'none'
+	      },
+	      cursor: 'default',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick,
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 2));
+	  }
+	});
+
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, three, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = three = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "three_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "orange"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "red"
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#three_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      style: {
+	        MozUserSelect: 'none'
+	      },
+	      cursor: 'default',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick,
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 3));
+	  }
+	});
+
+
+/***/ },
+/* 323 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, four, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = four = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    c('text_origin_out ', text_origin_out);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "four_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: 'blue'
+	    }), stop({
+	      offset: "95%",
+	      stopColor: 'purple  '
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#four_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      style: {
+	        MozUserSelect: 'none'
+	      },
+	      cursor: 'default',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick,
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 4));
+	  }
+	});
+
+
+/***/ },
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, five, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = five = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    c('text_origin_out ', text_origin_out);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "five_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: 'orange'
+	    }), stop({
+	      offset: "95%",
+	      stopColor: 'red'
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#five_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      style: {
+	        MozUserSelect: 'none'
+	      },
+	      cursor: 'default',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick,
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 5));
+	  }
+	});
+
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, six, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = six = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "six_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: 'orange'
+	    }), stop({
+	      offset: "95%",
+	      stopColor: 'purple'
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#six_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 6));
+	  }
+	});
+
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, seven, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = seven = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "seven_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: this.state.stop_1 || 'purple'
+	    }), stop({
+	      offset: "95%",
+	      stopColor: this.state.stop_2 || 'white'
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#seven_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 7));
+	  }
+	});
+
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, eight, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = eight = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    c('text_origin_out ', text_origin_out);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "eight_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: (this.state.stop_1 != null) || 'black'
+	    }), stop({
+	      offset: "95%",
+	      stopColor: (this.state.stop_2 != null) || 'white'
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#eight_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: this.props.onContextMenu,
+	      onClick: this.props.onClick
+	    }), text({
+	      x: text_origin_out[0] - ((r_001 * .9) / 4),
+	      y: text_origin_out[1] + ((r_001 * .9) / 3),
+	      fontSize: r_001 * .9
+	    }, 8));
+	  }
+	});
+
+
+/***/ },
+/* 328 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var PureRenderMixin, React, React_DOM, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3, zero;
+
+	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	feOffset = React.createFactory('feOffset');
+
+	module.exports = zero = rr({
+	  render: function() {
+	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
+	    i_origin = [0, 0];
+	    i_side = 1;
+	    o_origin = vec2.transformMat3(vec2.create(), i_origin, this.props.tMat);
+	    o_side = i_side * this.props.tMat[0];
+	    f_zero_x = .5 * this.props.tMat[0];
+	    f_zero_y = .5 * this.props.tMat[4];
+	    std_dev = .9 * this.props.tMat[0];
+	    text_origin_in = [.5, .5];
+	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
+	    c('text_origin_out ', text_origin_out);
+	    r_000 = .4;
+	    r_001 = this.props.tMat[0] * r_000;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, radialGradient({
+	      id: "zero_grad_000"
+	    }, stop({
+	      offset: "30%",
+	      stopColor: 'lightgrey'
+	    }), stop({
+	      offset: "70%",
+	      stopColor: "green"
+	    }), stop({
+	      offset: "95%",
+	      stopColor: "lightgreen"
+	    })), filter({
+	      id: 'f_zero'
+	    }, feGaussianBlur({
+	      "in": "SourceGraphic",
+	      result: "blurOut",
+	      stdDeviation: std_dev
+	    }), feOffset({
+	      "in": "blurOut",
+	      result: "dropBlur",
+	      dx: f_zero_x,
+	      dy: f_zero_y
+	    })), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      filter: 'url(#f_zero)',
+	      fill: 'hsl(33,99%,99%)',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick
+	    }), rect({
+	      x: o_origin[0],
+	      y: o_origin[1],
+	      width: o_side,
+	      height: o_side,
+	      opacity: .87,
+	      fill: 'url(#zero_grad_000)',
+	      stroke: 'blue',
+	      onContextMenu: function(e) {
+	        return e.preventDefault();
+	      },
+	      onClick: this.props.onClick
+	    }));
 	  }
 	});
 

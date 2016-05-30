@@ -9,6 +9,7 @@
 minesweeper = require '../components/minesweeper_000_.coffee'
 
 mine_000 = require '../components/mine_000_.coffee'
+one_000 = require '../components/one_000_.coffee'
 
 grab_board = (state) ->
 
@@ -79,5 +80,5 @@ map_dispatch_to_props = (dispatch, own_props) ->
     return {}
 
 module.exports = minesweeper_container = connect(map_state_to_props, map_dispatch_to_props)(minesweeper)
-
+# module.exports = sketch_container = connect(map_state_to_props, map_dispatch_to_props)(one_000)
 # module.exports = sketch_container = connect(map_state_to_props, map_dispatch_to_props)(mine_000)
