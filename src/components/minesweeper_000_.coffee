@@ -13,7 +13,6 @@ feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
 feOffset = React.createFactory 'feOffset'
 
-# font_awesome = require 'react-fontawesome'
 
 mine_000 = require './mine_000_.coffee'
 zero_000 = require './zero_000_.coffee'

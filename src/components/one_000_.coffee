@@ -16,28 +16,16 @@ module.exports = one = rr
 
         i_origin = [0, 0]
         i_side = 1
-        # o_origin = math.multiply M, i_origin
         o_origin = vec2.transformMat3 vec2.create(), i_origin, @props.tMat
-
-        # o_side = i_side * M[0][0]
         o_side = i_side * @props.tMat[0]
-
-        # f_zero_x = .5 * M[0][0]
         f_zero_x = .5 * @props.tMat[0]
-
-        # f_zero_y = .5 * M[1][1]
         f_zero_y = .5 * @props.tMat[4]
-
-        # std_dev = .9 * M[0][0]
         std_dev = .9 * @props.tMat[0]
 
 
-        # text_origin_in = [0, 0, 1]
         text_origin_in = [.5, .5]
-        # text_origin_out = math.multiply M, text_origin_in
         text_origin_out = vec2.transformMat3 vec2.create(), text_origin_in, @props.tMat
         r_000 = .4
-        # r_001 = M[0][0] * r_000
         r_001 = @props.tMat[0] * r_000
 
 
