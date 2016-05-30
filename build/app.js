@@ -59070,20 +59070,20 @@
 
 	combineReducers = __webpack_require__(303).combineReducers;
 
-	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, WIN_GAME = ref1.WIN_GAME, LOSE_GAME = ref1.LOSE_GAME;
+	ref1 = __webpack_require__(309), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, WIN_GAME = ref1.WIN_GAME, LOSE_GAME = ref1.LOSE_GAME;
 
 	module.exports = function(arg) {
 	  var app_reducer, arq_0, arq_1, arq_2, initial_state, initial_state_pre, ref2, root_reducer, routeReducer, viewport_height, viewport_width;
 	  initial_state = arg.initial_state, initial_state_pre = arg.initial_state_pre;
 	  c('initial_state in reducer index', initial_state);
-	  routeReducer = __webpack_require__(309);
-	  ref2 = __webpack_require__(310), viewport_height = ref2.viewport_height, viewport_width = ref2.viewport_width;
+	  routeReducer = __webpack_require__(310);
+	  ref2 = __webpack_require__(311), viewport_height = ref2.viewport_height, viewport_width = ref2.viewport_width;
 	  arq_0 = {
 	    viewport_width: viewport_width,
 	    viewport_height: viewport_height,
 	    routing: routeReducer
 	  };
-	  arq_2 = __webpack_require__(311)({
+	  arq_2 = __webpack_require__(312)({
 	    initial_state: initial_state,
 	    arq_0: arq_0
 	  });
@@ -59319,6 +59319,24 @@
 /* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var keymirror, minesweeper_action_types;
+
+	keymirror = __webpack_require__(286);
+
+	module.exports = minesweeper_action_types = keymirror({
+	  START_NEW_GAME: null,
+	  REVEAL: null,
+	  TOGGLE_FLAG: null,
+	  LOSE_GAME: null,
+	  WIN_GAME: null,
+	  REVEAL_MULTIPLE: null
+	});
+
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var LOCATION_CHANGE, c, routeReducer;
 
 	LOCATION_CHANGE = __webpack_require__(279).LOCATION_CHANGE;
@@ -59344,7 +59362,7 @@
 
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports) {
 
 	var viewport_height, viewport_width;
@@ -59378,7 +59396,7 @@
 
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var FINISHED, FLAGGED, GAME_LOST, GAME_STATE, GAME_WON, IN_PROGRESS, LOSE_GAME, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEAL, REVEALED, REVEAL_MULTIPLE, SIZE, START_NEW_GAME, TILE, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, WIN_GAME, _, c, combineReducers, game_generics_reducer_factory, ref, ref1, ref2, ref3, tile_reducer_factory;
@@ -59389,7 +59407,7 @@
 
 	ref1 = __webpack_require__(290), GAME_STATE = ref1.GAME_STATE, SIZE = ref1.SIZE, NOT_STARTED = ref1.NOT_STARTED, IN_PROGRESS = ref1.IN_PROGRESS, FINISHED = ref1.FINISHED, GAME_LOST = ref1.GAME_LOST, GAME_WON = ref1.GAME_WON;
 
-	ref2 = __webpack_require__(312), START_NEW_GAME = ref2.START_NEW_GAME, REVEAL = ref2.REVEAL, TOGGLE_FLAG = ref2.TOGGLE_FLAG, REVEAL_MULTIPLE = ref2.REVEAL_MULTIPLE, WIN_GAME = ref2.WIN_GAME, LOSE_GAME = ref2.LOSE_GAME;
+	ref2 = __webpack_require__(309), START_NEW_GAME = ref2.START_NEW_GAME, REVEAL = ref2.REVEAL, TOGGLE_FLAG = ref2.TOGGLE_FLAG, REVEAL_MULTIPLE = ref2.REVEAL_MULTIPLE, WIN_GAME = ref2.WIN_GAME, LOSE_GAME = ref2.LOSE_GAME;
 
 	ref3 = __webpack_require__(291), TILE = ref3.TILE, FLAGGED = ref3.FLAGGED, NOT_FLAGGED = ref3.NOT_FLAGGED, MINED = ref3.MINED, UNMINED = ref3.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref3.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref3.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref3.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref3.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref3.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref3.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref3.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref3.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref3.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref3.REVEALED, NOT_REVEALED = ref3.NOT_REVEALED;
 
@@ -59489,24 +59507,6 @@
 
 
 /***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var keymirror, minesweeper_action_types;
-
-	keymirror = __webpack_require__(286);
-
-	module.exports = minesweeper_action_types = keymirror({
-	  START_NEW_GAME: null,
-	  REVEAL: null,
-	  TOGGLE_FLAG: null,
-	  LOSE_GAME: null,
-	  WIN_GAME: null,
-	  REVEAL_MULTIPLE: null
-	});
-
-
-/***/ },
 /* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -59585,7 +59585,7 @@
 
 	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
 
-	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, TOGGLE_FLAG = ref1.TOGGLE_FLAG, LOSE_GAME = ref1.LOSE_GAME, WIN_GAME = ref1.WIN_GAME;
+	ref1 = __webpack_require__(309), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, TOGGLE_FLAG = ref1.TOGGLE_FLAG, LOSE_GAME = ref1.LOSE_GAME, WIN_GAME = ref1.WIN_GAME;
 
 	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
 
@@ -60187,6 +60187,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = mine = rr({
+	  mixins: [PureRenderMixin],
 	  probe_000: function(aa) {
 	    var path_commands, transform_000, transform_001, transform_post, transform_pre, x_0, y_0, z;
 	    path_commands = [['M', .5, .49], ['L', .8, .49], ['L', .8, .51], ['L', .5, .51], ['Z']];
@@ -60305,6 +60306,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = zero = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60396,6 +60398,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = one = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60496,6 +60499,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = two = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60599,6 +60603,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = three = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60698,6 +60703,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = four = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60797,6 +60803,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = five = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60896,6 +60903,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = six = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -60987,6 +60995,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = seven = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -61078,6 +61087,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = eight = rr({
+	  mixins: [PureRenderMixin],
 	  render: function() {
 	    var f_zero_x, f_zero_y, i_origin, i_side, o_origin, o_side, r_000, r_001, std_dev, text_origin_in, text_origin_out;
 	    i_origin = [0, 0];
@@ -61148,9 +61158,11 @@
 /* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var FINISHED, FLAGGED, GAME_LOST, GAME_STATE, GAME_WON, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEALED, React, React_DOM, SIZE, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, end_board_halo, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, ref2, ref3, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
+	var FINISHED, FLAGGED, GAME_LOST, GAME_STATE, GAME_WON, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, PureRenderMixin, REVEALED, React, React_DOM, SIZE, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, a, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, end_board_halo, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, ref2, ref3, rr, shortid, span, stop, svg, text, textArea, ul, vec2, vec3;
 
 	ref = __webpack_require__(2)(), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	PureRenderMixin = __webpack_require__(316);
 
 	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
 
@@ -61171,6 +61183,7 @@
 	feOffset = React.createFactory('feOffset');
 
 	module.exports = end_board_halo = rr({
+	  mixins: [PureRenderMixin],
 	  componentWillUnmount: function() {
 	    c("unmounting and halo_interval is", this.halo_interval);
 	    return clearInterval(this.halo_interval);

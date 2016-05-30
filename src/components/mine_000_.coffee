@@ -13,6 +13,7 @@ feOffset = React.createFactory 'feOffset'
 
 
 module.exports = mine = rr
+    mixins: [PureRenderMixin]
 
     probe_000: (aa) ->
         path_commands = [

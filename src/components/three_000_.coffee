@@ -12,6 +12,7 @@ feImage = React.createFactory 'feImage'
 feOffset = React.createFactory 'feOffset'
 
 module.exports = three = rr
+    mixins: [PureRenderMixin]
     render: ->
 
         i_origin = [0, 0]

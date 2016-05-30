@@ -1,6 +1,6 @@
 {_, gl_mat, React, React_DOM, rr, c, shortid, assign, keys, mat3, vec3, vec2} = require('../boilerplate.coffee')()
 
-# PureRenderMixin = require 'react-addons-pure-render-mixin'
+PureRenderMixin = require 'react-addons-pure-render-mixin'
 
 {p, div, h1, h2, h3, h4, h5, h6, span, svg, circle, rect, ul, line, li, ol, code, a, input, defs, clipPath, body, linearGradient, stop, g, path, d, polygon, image, pattern, filter, feBlend, feOffset, polyline, feGaussianBlur, feMergeNode, feMerge, radialGradient, foreignObject, text, textArea, ellipse, pattern} = React.DOM
 
@@ -17,6 +17,7 @@ feOffset = React.createFactory 'feOffset'
 
 
 module.exports = end_board_halo = rr
+    mixins: [PureRenderMixin]
     componentWillUnmount: ->
         c "unmounting and halo_interval is", @halo_interval
         clearInterval @halo_interval
