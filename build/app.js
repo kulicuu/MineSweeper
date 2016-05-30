@@ -57785,11 +57785,11 @@
 /* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var FINISHED, FLAGGED, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEALED, TILE, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, c, lay_mines, mine_and_salt_water, ref, ref1, ref2;
+	var FINISHED, FLAGGED, GAME_STATE, IN_PROGRESS, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEALED, SIZE, TILE, TIME_ELAPSED, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, c, lay_mines, mine_and_salt_water, ref, ref1, ref2;
 
 	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
 
-	ref1 = __webpack_require__(290), NOT_STARTED = ref1.NOT_STARTED, IN_PROGRESS = ref1.IN_PROGRESS, FINISHED = ref1.FINISHED;
+	ref1 = __webpack_require__(290), NOT_STARTED = ref1.NOT_STARTED, IN_PROGRESS = ref1.IN_PROGRESS, FINISHED = ref1.FINISHED, TIME_ELAPSED = ref1.TIME_ELAPSED, GAME_STATE = ref1.GAME_STATE, SIZE = ref1.SIZE;
 
 	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
 
@@ -57802,7 +57802,7 @@
 	    acc = {};
 	  }
 	  if (mined_probability == null) {
-	    mined_probability = .23;
+	    mined_probability = .133;
 	  }
 	  for (idx = i = 0, ref3 = size - 1; 0 <= ref3 ? i <= ref3 : i >= ref3; idx = 0 <= ref3 ? ++i : --i) {
 	    for (jdx = j = 0, ref4 = size - 1; 0 <= ref4 ? j <= ref4 : j >= ref4; jdx = 0 <= ref4 ? ++j : --j) {
@@ -57927,6 +57927,7 @@
 
 	module.exports = minesweeper_game_states = keymirror({
 	  GAME_STATE: null,
+	  SIZE: null,
 	  NOT_STARTED: null,
 	  IN_PROGRESS: null,
 	  FINISHED: null,
@@ -59364,11 +59365,11 @@
 /* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var FLAGGED, MINED, NOT_FLAGGED, NOT_REVEALED, REVEAL, REVEALED, START_NEW_GAME, TILE, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, _, c, game_generics_reducer_factory, ref, ref1, ref2, tile_reducer_factory;
+	var FLAGGED, LOSE_GAME, MINED, NOT_FLAGGED, NOT_REVEALED, REVEAL, REVEALED, REVEAL_MULTIPLE, START_NEW_GAME, TILE, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, WIN_GAME, _, c, game_generics_reducer_factory, ref, ref1, ref2, tile_reducer_factory;
 
 	ref = __webpack_require__(2)(), c = ref.c, _ = ref._;
 
-	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG;
+	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, WIN_GAME = ref1.WIN_GAME, LOSE_GAME = ref1.LOSE_GAME;
 
 	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
 
@@ -59382,6 +59383,9 @@
 	    }
 	    ref3 = prev_state.split(':'), is_mined = ref3[0], is_revealed = ref3[1], is_flagged = ref3[2];
 	    if ((action.type === REVEAL) && (action.payload === ("TILE:" + idx + ":" + jdx)) && (is_revealed === NOT_REVEALED)) {
+	      return [is_mined, REVEALED, is_flagged].join(':');
+	    } else if ((action.type === REVEAL_MULTIPLE) && (_.includes(action.payload, TILE + ":" + idx + ":" + jdx)) && (is_revealed === NOT_REVEALED)) {
+	      c('is_mined', is_mined);
 	      return [is_mined, REVEALED, is_flagged].join(':');
 	    } else {
 	      return prev_state;
@@ -59402,6 +59406,7 @@
 	    if (prev_state == null) {
 	      prev_state = initial_state;
 	    }
+	    c('in game state reducer');
 	    return prev_state;
 	  };
 	  time_elapsed_reducer = function(prev_state, action) {
@@ -59451,7 +59456,10 @@
 	module.exports = minesweeper_action_types = keymirror({
 	  START_NEW_GAME: null,
 	  REVEAL: null,
-	  TOGGLE_FLAG: null
+	  TOGGLE_FLAG: null,
+	  LOSE_GAME: null,
+	  WIN_GAME: null,
+	  REVEAL_MULTIPLE: null
 	});
 
 
@@ -59524,11 +59532,15 @@
 /* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var REVEAL, START_NEW_GAME, TOGGLE_FLAG, _, c, ref, ref1, reveal, reveal_thunk, start_new_game, toggle_flag;
+	var FINISHED, FLAGGED, GAME_STATE, IN_PROGRESS, LOSE_GAME, MINED, NOT_FLAGGED, NOT_REVEALED, NOT_STARTED, REVEAL, REVEALED, REVEAL_MULTIPLE, SIZE, START_NEW_GAME, TILE, TIME_ELAPSED, TOGGLE_FLAG, UNMINED, UNMINED_EIGHT_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_ZERO_MINE_NEIGHBORS, WIN_GAME, _, c, lose_game, ref, ref1, ref2, ref3, reveal, reveal_multiple, reveal_thunk, start_new_game, toggle_flag, win_game;
 
 	ref = __webpack_require__(2)(), _ = ref._, c = ref.c;
 
-	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, TOGGLE_FLAG = ref1.TOGGLE_FLAG;
+	ref1 = __webpack_require__(312), START_NEW_GAME = ref1.START_NEW_GAME, REVEAL = ref1.REVEAL, REVEAL_MULTIPLE = ref1.REVEAL_MULTIPLE, TOGGLE_FLAG = ref1.TOGGLE_FLAG, LOSE_GAME = ref1.LOSE_GAME, WIN_GAME = ref1.WIN_GAME;
+
+	ref2 = __webpack_require__(291), TILE = ref2.TILE, FLAGGED = ref2.FLAGGED, NOT_FLAGGED = ref2.NOT_FLAGGED, MINED = ref2.MINED, UNMINED = ref2.UNMINED, UNMINED_ZERO_MINE_NEIGHBORS = ref2.UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR = ref2.UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS = ref2.UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS = ref2.UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS = ref2.UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS = ref2.UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS = ref2.UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS = ref2.UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS = ref2.UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED = ref2.REVEALED, NOT_REVEALED = ref2.NOT_REVEALED;
+
+	ref3 = __webpack_require__(290), NOT_STARTED = ref3.NOT_STARTED, IN_PROGRESS = ref3.IN_PROGRESS, FINISHED = ref3.FINISHED, TIME_ELAPSED = ref3.TIME_ELAPSED, GAME_STATE = ref3.GAME_STATE, SIZE = ref3.SIZE;
 
 	start_new_game = function() {
 	  return c('start new game');
@@ -59542,20 +59554,197 @@
 	  };
 	};
 
+	reveal_multiple = function(rayy_zeros) {
+	  return {
+	    type: REVEAL_MULTIPLE,
+	    payload: rayy_zeros
+	  };
+	};
+
+	lose_game = function(payload) {
+	  return {
+	    type: LOSE_GAME
+	  };
+	};
+
+	win_game = function() {
+	  return {
+	    type: WIN_GAME
+	  };
+	};
+
 	reveal_thunk = function(tile_coord) {
-	  var func_000;
+	  var check_game_state, func_000, recursive_zero_reveal_002, zero_reveal;
 	  c(tile_coord);
+	  check_game_state = function(get_state) {
+	    var basket_cloaked_clean_water, cursor, game_over_blown_up, game_over_won, i, idx, is_flagged, is_mined, is_revealed, j, jdx, ref4, ref5, ref6, size, state;
+	    state = get_state();
+	    size = state.get(SIZE);
+	    basket_cloaked_clean_water = [];
+	    game_over_blown_up = false;
+	    for (idx = i = 0, ref4 = size - 1; 0 <= ref4 ? i <= ref4 : i >= ref4; idx = 0 <= ref4 ? ++i : --i) {
+	      for (jdx = j = 0, ref5 = size - 1; 0 <= ref5 ? j <= ref5 : j >= ref5; jdx = 0 <= ref5 ? ++j : --j) {
+	        cursor = TILE + ":" + idx + ":" + jdx;
+	        ref6 = state.get(cursor).split(':'), is_mined = ref6[0], is_revealed = ref6[1], is_flagged = ref6[2];
+	        if ((is_mined === MINED) && (is_revealed === REVEALED)) {
+	          c('game over man');
+	          game_over_blown_up = true;
+	        }
+	        if ((is_mined !== MINED) && (is_revealed === NOT_REVEALED)) {
+	          basket_cloaked_clean_water.push(cursor);
+	        }
+	      }
+	    }
+	    game_over_won = basket_cloaked_clean_water.length === 0;
+	    return {
+	      game_over_blown_up: game_over_blown_up,
+	      game_over_won: game_over_won
+	    };
+	  };
+	  recursive_zero_reveal_002 = function(arg) {
+	    var ac, counter, cursor, idx, jdx, size, stack, state;
+	    idx = arg.idx, jdx = arg.jdx, stack = arg.stack, state = arg.state, size = arg.size, counter = arg.counter;
+	    ac = arguments.callee;
+	    cursor = TILE + ":" + idx + ":" + jdx;
+	    stack.push(TILE + ":" + idx + ":" + jdx);
+	    if (state[cursor].split(':')[0] === UNMINED_ZERO_MINE_NEIGHBORS) {
+	      if (jdx < (size - 1)) {
+	        if (!_.includes(stack, TILE + ":" + idx + ":" + (jdx + 1))) {
+	          ac({
+	            idx: idx,
+	            jdx: jdx + 1,
+	            stack: stack,
+	            state: state,
+	            size: size
+	          });
+	        }
+	      }
+	      if (jdx > 0) {
+	        if (!_.includes(stack, TILE + ":" + idx + ":" + (jdx - 1))) {
+	          ac({
+	            idx: idx,
+	            jdx: jdx - 1,
+	            stack: stack,
+	            state: state,
+	            size: size
+	          });
+	        }
+	      }
+	      if (idx > 0) {
+	        if (!_.includes(stack, TILE + ":" + (idx - 1) + ":" + jdx)) {
+	          ac({
+	            idx: idx - 1,
+	            jdx: jdx,
+	            stack: stack,
+	            state: state,
+	            size: size
+	          });
+	        }
+	        if (jdx > 0) {
+	          if (!_.includes(stack, TILE + ":" + (idx - 1) + ":" + (jdx - 1))) {
+	            ac({
+	              idx: idx - 1,
+	              jdx: jdx - 1,
+	              stack: stack,
+	              state: state,
+	              size: size
+	            });
+	          }
+	        }
+	        if (jdx < (size - 1)) {
+	          if (!_.includes(stack, TILE + ":" + (idx - 1) + ":" + (jdx + 1))) {
+	            ac({
+	              idx: idx - 1,
+	              jdx: jdx + 1,
+	              stack: stack,
+	              state: state,
+	              size: size
+	            });
+	          }
+	        }
+	      }
+	      if (idx < (size - 1)) {
+	        if (!_.includes(stack, TILE + ":" + (idx + 1) + ":" + jdx)) {
+	          ac({
+	            idx: idx + 1,
+	            jdx: jdx,
+	            stack: stack,
+	            state: state,
+	            size: size
+	          });
+	        }
+	        if (jdx > 0) {
+	          if (!_.includes(stack, TILE + ":" + (idx + 1) + ":" + (jdx - 1))) {
+	            ac({
+	              idx: idx + 1,
+	              jdx: jdx - 1,
+	              stack: stack,
+	              state: state,
+	              size: size
+	            });
+	          }
+	        }
+	        if (jdx < (size - 1)) {
+	          if (!_.includes(stack, TILE + ":" + (idx + 1) + ":" + (jdx + 1))) {
+	            ac({
+	              idx: idx + 1,
+	              jdx: jdx + 1,
+	              stack: stack,
+	              state: state,
+	              size: size
+	            });
+	          }
+	        }
+	      }
+	    }
+	    return stack;
+	  };
+	  zero_reveal = function(get_state) {
+	    var arq, idx, jdx, rayy, size, stack, state;
+	    c('tile_coord is scoped here also', tile_coord);
+	    state = get_state();
+	    size = state.get(SIZE);
+	    rayy = tile_coord.split(':');
+	    idx = parseInt(rayy[1]);
+	    jdx = parseInt(rayy[2]);
+	    arq = state.toJS();
+	    stack = recursive_zero_reveal_002({
+	      idx: idx,
+	      jdx: jdx,
+	      stack: [],
+	      state: arq,
+	      size: size,
+	      counter: 0
+	    });
+	    return stack;
+	  };
 	  func_000 = (function(_this) {
 	    return function(dispatch, get_state) {
+	      var before_state, game_status, is_flagged, is_mined, is_revealed, rayy_zeros, ref4;
 	      c('the', dispatch, get_state);
-	      c('before state', get_state().get(tile_coord));
-	      dispatch(reveal(tile_coord));
-	      return c('after state', get_state().get(tile_coord));
+	      before_state = get_state().get(tile_coord);
+	      c('before_state', before_state);
+	      ref4 = before_state.split(':'), is_mined = ref4[0], is_revealed = ref4[1], is_flagged = ref4[2];
+	      c('is_mined', is_mined);
+	      if (is_mined === UNMINED_ZERO_MINE_NEIGHBORS) {
+	        c('CALL THE RECURSIVE ZERO REVEALER !!!!!!!!!!!!!!!!!!!!!!');
+	        rayy_zeros = zero_reveal(get_state);
+	        c('rayy_zeros', rayy_zeros);
+	        dispatch(reveal_multiple(rayy_zeros));
+	      } else {
+	        dispatch(reveal(tile_coord));
+	      }
+	      c('after state', get_state().get(tile_coord));
+	      game_status = check_game_state(get_state);
+	      c('game_status', game_status);
+	      if (game_status.game_over_blown_up === true) {
+	        return dispatch(lose_game());
+	      } else if (game_status.game_over_won === true) {
+	        return dispatch(win_game());
+	      }
 	    };
 	  })(this);
-	  return func_000.bind({
-	    tile_coord: tile_coord
-	  });
+	  return func_000;
 	};
 
 	toggle_flag = function(tile_coord) {
@@ -60028,7 +60217,6 @@
 	    std_dev = .9 * this.props.tMat[0];
 	    text_origin_in = [.5, .5];
 	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
-	    c('text_origin_out ', text_origin_out);
 	    r_000 = .4;
 	    r_001 = this.props.tMat[0] * r_000;
 	    return svg({
@@ -60120,7 +60308,6 @@
 	    std_dev = .9 * this.props.tMat[0];
 	    text_origin_in = [.5, .5];
 	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
-	    c('text_origin_out ', text_origin_out);
 	    r_000 = .4;
 	    r_001 = this.props.tMat[0] * r_000;
 	    return svg({
@@ -60423,7 +60610,6 @@
 	    std_dev = .9 * this.props.tMat[0];
 	    text_origin_in = [.5, .5];
 	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
-	    c('text_origin_out ', text_origin_out);
 	    r_000 = .4;
 	    r_001 = this.props.tMat[0] * r_000;
 	    return svg({
@@ -60523,7 +60709,6 @@
 	    std_dev = .9 * this.props.tMat[0];
 	    text_origin_in = [.5, .5];
 	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
-	    c('text_origin_out ', text_origin_out);
 	    r_000 = .4;
 	    r_001 = this.props.tMat[0] * r_000;
 	    return svg({
@@ -60805,7 +60990,6 @@
 	    std_dev = .9 * this.props.tMat[0];
 	    text_origin_in = [.5, .5];
 	    text_origin_out = vec2.transformMat3(vec2.create(), text_origin_in, this.props.tMat);
-	    c('text_origin_out ', text_origin_out);
 	    r_000 = .4;
 	    r_001 = this.props.tMat[0] * r_000;
 	    return svg({

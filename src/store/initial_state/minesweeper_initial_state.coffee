@@ -1,11 +1,12 @@
 
 { c, _ } = require('../../boilerplate.coffee')()
 
-{ NOT_STARTED, IN_PROGRESS, FINISHED } = require '../../constants/minesweeper_states.coffee'
+{ NOT_STARTED, IN_PROGRESS, FINISHED, TIME_ELAPSED, GAME_STATE, SIZE } = require '../../constants/minesweeper_states.coffee'
+
 
 { TILE, FLAGGED, NOT_FLAGGED, MINED, UNMINED, UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED, NOT_REVEALED } = require '../../constants/tile_states.coffee'
 
-lay_mines = (size = 20, acc = {}, mined_probability = .23) ->
+lay_mines = (size = 20, acc = {}, mined_probability = .133) ->
         for idx in [0 .. (size - 1)]
             for jdx in [0 .. (size - 1)]
                 if Math.random() < mined_probability

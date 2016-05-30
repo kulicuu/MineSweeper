@@ -34,7 +34,6 @@ module.exports = seven = rr
 
         # text_origin_in = [0, 0, 1]
         text_origin_in = [.5, .5]
-        # text_origin_out = math.multiply M, text_origin_in
         text_origin_out = vec2.transformMat3 vec2.create(), text_origin_in, @props.tMat
 
         r_000 = .4

@@ -7,6 +7,7 @@ module.exports = minesweeper_game_states = keymirror
 
     # key:
     GAME_STATE: null
+    SIZE: null
     # associated attributes
     NOT_STARTED: null
     IN_PROGRESS: null

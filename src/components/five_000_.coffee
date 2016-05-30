@@ -36,7 +36,6 @@ module.exports = five = rr
         text_origin_in = [.5, .5]
         # text_origin_out = math.multiply M, text_origin_in
         text_origin_out = vec2.transformMat3 vec2.create(), text_origin_in, @props.tMat
-        c 'text_origin_out ', text_origin_out
         r_000 = .4
         # r_001 = M[0][0] * r_000
         r_001 = @props.tMat[0] * r_000
