@@ -63,5 +63,6 @@ module.exports = ( size = 20 ) ->
         TIME_ELAPSED: 0
         GAME_STATE: NOT_STARTED
         SIZE: size
+        GROUND_ZERO: null
 
     return _.assign(game_meta, starting_board)

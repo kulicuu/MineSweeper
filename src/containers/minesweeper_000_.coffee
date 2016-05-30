@@ -27,10 +27,11 @@ map_state_to_props = (state, own_props) ->
 
 
 
-    obj_3 = _.pick obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED', 'routing', 'viewport_width', 'viewport_height']
+    obj_3 = _.pick obj_1, ['GROUND_ZERO', 'GAME_STATE', 'SIZE', 'TIME_ELAPSED', 'routing', 'viewport_width', 'viewport_height']
 
     obj_2 = _.omit obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED']
-    { SIZE, GAME_STATE, TIME_ELAPSED } = obj_2
+    { GROUND_ZERO, SIZE, GAME_STATE, TIME_ELAPSED } = obj_3
+    c 'obj_2', obj_3
 
 
 
@@ -63,6 +64,7 @@ map_state_to_props = (state, own_props) ->
         SIZE # can/could replace redundant lowercased version below
         GAME_STATE
         TIME_ELAPSED
+        GROUND_ZERO
 
         board: obj_2
         margin

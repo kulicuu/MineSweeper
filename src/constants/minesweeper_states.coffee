@@ -12,6 +12,8 @@ module.exports = minesweeper_game_states = keymirror
     NOT_STARTED: null
     IN_PROGRESS: null
     FINISHED: null
+    GAME_LOST: null
+    GAME_WON: null
 
     # key
     TIME_ELAPSED: null

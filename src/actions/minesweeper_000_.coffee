@@ -24,8 +24,9 @@ reveal_multiple = (rayy_zeros) ->
     payload: rayy_zeros
 
 
-lose_game = (payload) ->
+lose_game = (ground_zero) ->
     type: LOSE_GAME
+    payload: ground_zero
 
 win_game = ->
     type: WIN_GAME
@@ -46,12 +47,14 @@ reveal_thunk = (tile_coord) ->
                 if (is_mined is MINED) and (is_revealed is REVEALED)
                     c 'game over man'
                     game_over_blown_up = true
+                    ground_zero = cursor
                 if (is_mined isnt MINED) and (is_revealed is NOT_REVEALED)
                     basket_cloaked_clean_water.push cursor
         game_over_won = basket_cloaked_clean_water.length is 0
         return {
             game_over_blown_up
             game_over_won
+            ground_zero
         }
 
 
@@ -123,7 +126,7 @@ reveal_thunk = (tile_coord) ->
         game_status = check_game_state get_state
         c 'game_status', game_status
         if game_status.game_over_blown_up is true
-            dispatch(lose_game())
+            dispatch(lose_game(game_status.ground_zero))
         else if game_status.game_over_won is true
             dispatch(win_game())
 

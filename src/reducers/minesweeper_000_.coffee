@@ -6,6 +6,9 @@
 
 { combineReducers } = require 'redux-immutable'
 
+
+{ GAME_STATE, SIZE, NOT_STARTED, IN_PROGRESS, FINISHED, GAME_LOST, GAME_WON } = require '../constants/minesweeper_states.coffee'
+
 { START_NEW_GAME, REVEAL, TOGGLE_FLAG, REVEAL_MULTIPLE, WIN_GAME, LOSE_GAME } = require '../constants/minesweeper_actions_000_.coffee'
 
 { TILE, FLAGGED, NOT_FLAGGED, MINED, UNMINED, UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED, NOT_REVEALED } = require '../constants/tile_states.coffee'
@@ -16,6 +19,8 @@ tile_reducer_factory = ({idx, jdx, initial_state}) ->
         if (action.type is REVEAL) and (action.payload is "TILE:#{idx}:#{jdx}") and (is_revealed is NOT_REVEALED)
             return [is_mined, REVEALED, is_flagged].join(':')
         else if (action.type is REVEAL_MULTIPLE) and (_.includes(action.payload, "#{TILE}:#{idx}:#{jdx}")) and (is_revealed is NOT_REVEALED)
+            return [is_mined, REVEALED, is_flagged].join(':')
+        else if (action.type is LOSE_GAME)
             return [is_mined, REVEALED, is_flagged].join(':')
         else
             return prev_state
@@ -31,23 +36,40 @@ game_generics_reducer_factory = (initial_state) ->
         if action.type is START_NEW_GAME
             c 'starting new game'
 
+        else if action.type is WIN_GAME
+            c 'winning_game'
+            return GAME_WON
+
+        else if action.type is LOSE_GAME
+            c 'losing game'
+            return GAME_LOST
+
+
 
         return prev_state
 
     time_elapsed_reducer = (prev_state = initial_state, action) ->
         return prev_state
 
-    return { size_reducer, game_state_reducer, time_elapsed_reducer }
+    ground_zero_reducer = (prev_state = initial_state, action) ->
+        c 'zero payload', action.payload
+        if action.type is LOSE_GAME
+            return action.payload
+        else
+            return prev_state
+
+    return { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer }
 
 
 module.exports = ({initial_state, arq_0})->
 
 
-    { size_reducer, game_state_reducer, time_elapsed_reducer } = game_generics_reducer_factory(initial_state)
+    { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer } = game_generics_reducer_factory(initial_state)
     arq = {
         SIZE: size_reducer
         GAME_STATE: game_state_reducer
         TIME_ELAPSED: time_elapsed_reducer
+        GROUND_ZERO: ground_zero_reducer
     }
 
     size = initial_state.get 'SIZE'

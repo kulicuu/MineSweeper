@@ -4,6 +4,8 @@ PureRenderMixin = require 'react-addons-pure-render-mixin'
 
 {p, div, h1, h2, h3, h4, h5, h6, span, svg, circle, rect, ul, line, li, ol, code, a, input, defs, clipPath, body, linearGradient, stop, g, path, d, polygon, image, pattern, filter, feBlend, feOffset, polyline, feGaussianBlur, feMergeNode, feMerge, radialGradient, foreignObject, text, textArea, ellipse, pattern} = React.DOM
 
+{ GAME_STATE, SIZE, NOT_STARTED, IN_PROGRESS, FINISHED, GAME_LOST, GAME_WON } = require '../constants/minesweeper_states.coffee'
+
 { TILE, FLAGGED, NOT_FLAGGED, MINED, UNMINED, UNMINED_ZERO_MINE_NEIGHBORS, UNMINED_ONE_MINE_NEIGHBOR, UNMINED_TWO_MINE_NEIGHBORS, UNMINED_THREE_MINE_NEIGHBORS, UNMINED_FOUR_MINE_NEIGHBORS, UNMINED_FIVE_MINE_NEIGHBORS, UNMINED_SIX_MINE_NEIGHBORS, UNMINED_SEVEN_MINE_NEIGHBORS, UNMINED_EIGHT_MINE_NEIGHBORS, REVEALED, NOT_REVEALED } = require '../constants/tile_states.coffee'
 
 textArea = React.createFactory 'textArea'
@@ -24,6 +26,7 @@ five_000 = require './five_000_.coffee'
 six_000 = require './six_000_.coffee'
 seven_000 = require './seven_000_.coffee'
 eight_000 = require './eight_000_.coffee'
+halo_000 = require './end_board_halo_000_.coffee'
 
 module.exports = minesweeper = rr
 
@@ -54,7 +57,7 @@ module.exports = minesweeper = rr
         @rect_l_t s_rect, l_tMat
 
     restart_button: ->
-        c 'orientation', @props.orientation
+
         switch @props.orientation
             when 'horizontal'
                 s_button =
@@ -128,24 +131,7 @@ module.exports = minesweeper = rr
                         result: "dropBlur"
                         dx: f1_x
                         dy: f1_y
-            rect
-                x: restart_button.x
-                y: restart_button.y
-                width: restart_button.width
-                height: restart_button.height
-                fill: 'white'
-                onClick: @props.start_new_game
-                cursor: 'pointer'
-            text
-                x: restart_button.x + (restart_button.width * .16)
-                y: restart_button.y + (restart_button.height * .85)
-                fill: 'red'
-                fontSize: restart_button.height * .8
-                fontFamily: 'sans'
-                onClick: @props.start_new_game
-                cursor: 'pointer'
-                ,
-                "↻"
+
 
             for row, idx in transforms
                 for l_tMat, jdx in row
@@ -207,3 +193,47 @@ module.exports = minesweeper = rr
                                     when UNMINED_EIGHT_MINE_NEIGHBORS
                                         eight_000
                                             tMat: j_tMat
+
+            if @props.GAME_STATE is GAME_LOST
+                c 'goround zero', @props.GROUND_ZERO
+                cursor = @props.GROUND_ZERO.split ':'
+                idx = cursor[1]
+                jdx = cursor[2]
+
+                smaller = @props.tMat[0]
+
+                port = 1 - @props.margin
+                tile_size = port / @props.size # dimension of tile as percentage of viewport size
+
+                x_displacement = jdx * tile_size
+                y_displacement = idx * tile_size
+                transform_matrix = [
+                    tile_size, 0, 0,
+                    0, tile_size, 0,
+                    x_displacement, y_displacement, 1
+                ]
+
+                j_tMat = mat3.multiply mat3.create(), @props.tMat, transform_matrix
+
+
+                c 'lost'
+                halo_000
+                    tMat: j_tMat
+            rect
+                x: restart_button.x
+                y: restart_button.y
+                width: restart_button.width
+                height: restart_button.height
+                fill: 'white'
+                onClick: @props.start_new_game
+                cursor: 'pointer'
+            text
+                x: restart_button.x + (restart_button.width * .16)
+                y: restart_button.y + (restart_button.height * .85)
+                fill: 'red'
+                fontSize: restart_button.height * .8
+                fontFamily: 'sans'
+                onClick: @props.start_new_game
+                cursor: 'pointer'
+                ,
+                "↻"
