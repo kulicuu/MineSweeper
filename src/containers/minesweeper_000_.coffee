@@ -31,7 +31,7 @@ map_state_to_props = (state, own_props) ->
 
     obj_2 = _.omit obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED']
     { GROUND_ZERO, SIZE, GAME_STATE, TIME_ELAPSED } = obj_3
-    c 'obj_2', obj_3
+
 
 
 

@@ -59077,7 +59077,6 @@
 	module.exports = function(arg) {
 	  var app_reducer, arq_0, arq_1, arq_2, initial_state, initial_state_pre, ref2, root_reducer, routeReducer, viewport_height, viewport_width;
 	  initial_state = arg.initial_state, initial_state_pre = arg.initial_state_pre;
-	  c('initial_state in reducer index', initial_state);
 	  routeReducer = __webpack_require__(310);
 	  ref2 = __webpack_require__(311), viewport_height = ref2.viewport_height, viewport_width = ref2.viewport_width;
 	  arq_0 = {
@@ -59454,7 +59453,6 @@
 	    if (prev_state == null) {
 	      prev_state = initial_state;
 	    }
-	    c('in game state reducer');
 	    if (action.type === START_NEW_GAME) {
 	      c('starting new game');
 	    } else if (action.type === WIN_GAME) {
@@ -59542,7 +59540,6 @@
 	  obj_3 = _.pick(obj_1, ['GROUND_ZERO', 'GAME_STATE', 'SIZE', 'TIME_ELAPSED', 'routing', 'viewport_width', 'viewport_height']);
 	  obj_2 = _.omit(obj_1, ['GAME_STATE', 'SIZE', 'TIME_ELAPSED']);
 	  GROUND_ZERO = obj_3.GROUND_ZERO, SIZE = obj_3.SIZE, GAME_STATE = obj_3.GAME_STATE, TIME_ELAPSED = obj_3.TIME_ELAPSED;
-	  c('obj_2', obj_3);
 	  width = state.get('viewport_width');
 	  height = state.get('viewport_height');
 	  smaller = width < height ? width : height;
@@ -59600,14 +59597,12 @@
 	ref3 = __webpack_require__(290), NOT_STARTED = ref3.NOT_STARTED, IN_PROGRESS = ref3.IN_PROGRESS, FINISHED = ref3.FINISHED, TIME_ELAPSED = ref3.TIME_ELAPSED, GAME_STATE = ref3.GAME_STATE, SIZE = ref3.SIZE;
 
 	start_new_game = function() {
-	  c('start new game');
 	  return {
 	    type: START_NEW_GAME
 	  };
 	};
 
 	reveal = function(tile_coord) {
-	  c('reveaoling', tile_coord);
 	  return {
 	    type: REVEAL,
 	    payload: tile_coord
@@ -59636,7 +59631,6 @@
 
 	reveal_thunk = function(tile_coord) {
 	  var check_game_state, func_000, recursive_zero_reveal_002, zero_reveal;
-	  c(tile_coord);
 	  check_game_state = function(get_state) {
 	    var basket_cloaked_clean_water, cursor, game_over_blown_up, game_over_won, ground_zero, i, idx, is_flagged, is_mined, is_revealed, j, jdx, ref4, ref5, ref6, size, state;
 	    state = get_state();
@@ -59764,7 +59758,6 @@
 	  };
 	  zero_reveal = function(get_state) {
 	    var arq, idx, jdx, rayy, size, stack, state;
-	    c('tile_coord is scoped here also', tile_coord);
 	    state = get_state();
 	    size = state.get(SIZE);
 	    rayy = tile_coord.split(':');
@@ -59784,22 +59777,15 @@
 	  func_000 = (function(_this) {
 	    return function(dispatch, get_state) {
 	      var before_state, game_status, is_flagged, is_mined, is_revealed, rayy_zeros, ref4;
-	      c('the', dispatch, get_state);
 	      before_state = get_state().get(tile_coord);
-	      c('before_state', before_state);
 	      ref4 = before_state.split(':'), is_mined = ref4[0], is_revealed = ref4[1], is_flagged = ref4[2];
-	      c('is_mined', is_mined);
 	      if (is_mined === UNMINED_ZERO_MINE_NEIGHBORS) {
-	        c('CALL THE RECURSIVE ZERO REVEALER !!!!!!!!!!!!!!!!!!!!!!');
 	        rayy_zeros = zero_reveal(get_state);
-	        c('rayy_zeros', rayy_zeros);
 	        dispatch(reveal_multiple(rayy_zeros));
 	      } else {
 	        dispatch(reveal(tile_coord));
 	      }
-	      c('after state', get_state().get(tile_coord));
 	      game_status = check_game_state(get_state);
-	      c('game_status', game_status);
 	      if (game_status.game_over_blown_up === true) {
 	        return dispatch(lose_game(game_status.ground_zero));
 	      } else if (game_status.game_over_won === true) {
@@ -59810,9 +59796,7 @@
 	  return func_000;
 	};
 
-	toggle_flag = function(tile_coord) {
-	  return c('toggle_flag at coord', tile_coord);
-	};
+	toggle_flag = function(tile_coord) {};
 
 	module.exports = {
 	  start_new_game: start_new_game,

@@ -6,7 +6,7 @@
 Immutable = require 'immutable'
 
 module.exports = ({initial_state, initial_state_pre}) ->
-    c 'initial_state in reducer index', initial_state
+
     routeReducer = require './routeReducer.coffee'
 
     { viewport_height, viewport_width } = require './boundingClientRect.coffee'

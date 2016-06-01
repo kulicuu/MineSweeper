@@ -32,7 +32,7 @@ game_generics_reducer_factory = (initial_state) ->
     # return size_reducer
 
     game_state_reducer = (prev_state = initial_state, action) ->
-        c 'in game state reducer'
+
         if action.type is START_NEW_GAME
             c 'starting new game'
 

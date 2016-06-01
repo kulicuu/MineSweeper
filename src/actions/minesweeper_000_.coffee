@@ -11,11 +11,11 @@
 
 
 start_new_game = ->
-    c 'start new game'
+
     type: START_NEW_GAME
 
 reveal = (tile_coord) ->
-    c 'reveaoling', tile_coord
+
     type: REVEAL
     payload: tile_coord
 
@@ -33,7 +33,7 @@ win_game = ->
 
 
 reveal_thunk = (tile_coord) ->
-    c tile_coord
+
 
     check_game_state = (get_state) ->
         state = get_state()
@@ -94,7 +94,7 @@ reveal_thunk = (tile_coord) ->
 
 
     zero_reveal = (get_state) ->
-        c 'tile_coord is scoped here also', tile_coord
+
         state = get_state()
         size = state.get SIZE
         rayy = tile_coord.split ':'
@@ -107,24 +107,19 @@ reveal_thunk = (tile_coord) ->
 
 
     func_000 = (dispatch, get_state) =>
-        c 'the', dispatch, get_state
+
         before_state = get_state().get(tile_coord)
-        c 'before_state', before_state
+
         [is_mined, is_revealed, is_flagged] = before_state.split(':')
-        c 'is_mined', is_mined
         if is_mined is UNMINED_ZERO_MINE_NEIGHBORS
-            c 'CALL THE RECURSIVE ZERO REVEALER !!!!!!!!!!!!!!!!!!!!!!'
 
             rayy_zeros = zero_reveal get_state
-            c 'rayy_zeros', rayy_zeros
             dispatch(reveal_multiple(rayy_zeros))
 
         else
             dispatch(reveal(tile_coord))
 
-        c 'after state', get_state().get(tile_coord)
         game_status = check_game_state get_state
-        c 'game_status', game_status
         if game_status.game_over_blown_up is true
             dispatch(lose_game(game_status.ground_zero))
         else if game_status.game_over_won is true
@@ -141,7 +136,7 @@ reveal_thunk = (tile_coord) ->
 
 toggle_flag = (tile_coord) ->
 
-    c 'toggle_flag at coord', tile_coord
+
 
 
 module.exports = { start_new_game, reveal: reveal_thunk, toggle_flag }
