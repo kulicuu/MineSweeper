@@ -3,6 +3,7 @@
 { combineReducers } = require 'redux-immutable'
 { START_NEW_GAME, REVEAL, TOGGLE_FLAG, REVEAL_MULTIPLE, WIN_GAME, LOSE_GAME } = require '../constants/minesweeper_actions_000_.coffee'
 
+Immutable = require 'immutable'
 
 module.exports = ({initial_state, initial_state_pre}) ->
     c 'initial_state in reducer index', initial_state
@@ -28,8 +29,12 @@ module.exports = ({initial_state, initial_state_pre}) ->
 
     root_reducer = (state, action) =>
         if action.type is START_NEW_GAME
+            { viewport_width: width, viewport_height: height } = state.toJS()
             state = undefined
-            return app_reducer(state = initial_state, action)
+
+            initial_state_pre = require('../store/initial_state/index.coffee')({width, height})
+            initial_state2 = Immutable.Map initial_state_pre
+            return app_reducer(state = initial_state2, action)
         else
             return app_reducer(state, action)
     # return app_reducer(arq_1)

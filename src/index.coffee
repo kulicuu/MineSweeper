@@ -20,6 +20,7 @@ window.onload = =>
     { width, height } = root.getBoundingClientRect()
     initial_state_pre = require('./store/initial_state/index.coffee')({width, height})
     initial_state = Immutable.Map initial_state_pre
+
     store = require('./store/configure_store.coffee')({initial_state, initial_state_pre})
 
     debounce = (func, wait, immediate) ->

@@ -52,7 +52,7 @@ game_generics_reducer_factory = (initial_state) ->
         return prev_state
 
     ground_zero_reducer = (prev_state = initial_state, action) ->
-        c 'zero payload', action.payload
+
         if action.type is LOSE_GAME
             return action.payload
         else

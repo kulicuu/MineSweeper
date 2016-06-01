@@ -19,7 +19,6 @@ feOffset = React.createFactory 'feOffset'
 module.exports = end_board_halo = rr
     mixins: [PureRenderMixin]
     componentWillUnmount: ->
-        c "unmounting and halo_interval is", @halo_interval
         clearInterval @halo_interval
     getInitialState: ->
         M = @props.tMat

@@ -16,9 +16,11 @@ feImage = React.createFactory 'feImage'
 feOffset = React.createFactory 'feOffset'
 
 
-mine_000 = require './mine_000_.coffee'
+# mine_000 = require './mine_000_.coffee'
+mine_001 = require './mine_001_.coffee'
 zero_000 = require './zero_000_.coffee'
-one_000 = require './one_000_.coffee'
+# one_000 = require './one_000_.coffee'
+one_001 = require './one_001_.coffee'
 two_000 = require './two_000_.coffee'
 three_000 = require './three_000_.coffee'
 four_000 = require './four_000_.coffee'
@@ -164,13 +166,13 @@ module.exports = minesweeper = rr
                             when REVEALED
                                 switch actual
                                     when MINED
-                                        mine_000
+                                        mine_001
                                             tMat: j_tMat
                                     when UNMINED_ZERO_MINE_NEIGHBORS
                                         zero_000
                                             tMat: j_tMat
                                     when UNMINED_ONE_MINE_NEIGHBOR
-                                        one_000
+                                        one_001
                                             tMat: j_tMat
                                     when UNMINED_TWO_MINE_NEIGHBORS
                                         two_000
@@ -195,7 +197,6 @@ module.exports = minesweeper = rr
                                             tMat: j_tMat
 
             if @props.GAME_STATE is GAME_LOST
-                c 'goround zero', @props.GROUND_ZERO
                 cursor = @props.GROUND_ZERO.split ':'
                 idx = cursor[1]
                 jdx = cursor[2]
