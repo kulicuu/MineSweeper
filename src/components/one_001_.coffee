@@ -11,7 +11,7 @@ feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
 feOffset = React.createFactory 'feOffset'
 
-module.exports = one = ({tMat}) ->
+module.exports = one = ({tMat, key}) ->
 
     render = ->
 
@@ -33,6 +33,7 @@ module.exports = one = ({tMat}) ->
         svg
             width: '100%'
             height: '100%'
+            key: key
             defs
                 radialGradient
                     id: "one_grad_000"

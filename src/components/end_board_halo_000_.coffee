@@ -74,3 +74,4 @@ module.exports = end_board_halo = rr
                 cy: o_origin[1]
                 r: @state.r
                 opacity: .33
+                onContextMenu: (e) => e.preventDefault();

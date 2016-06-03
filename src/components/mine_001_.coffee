@@ -12,7 +12,7 @@ feImage = React.createFactory 'feImage'
 feOffset = React.createFactory 'feOffset'
 
 
-module.exports = mine = ({tMat}) ->
+module.exports = mine = ({tMat, key}) ->
 
 
     probe_000 = (aa) ->
@@ -89,6 +89,7 @@ module.exports = mine = ({tMat}) ->
         svg
             width: '100%'
             height: '100%'
+            key: key
             defs
                 radialGradient
                     id: "rGrad_009"

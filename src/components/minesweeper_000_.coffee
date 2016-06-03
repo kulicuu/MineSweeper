@@ -17,8 +17,10 @@ feOffset = React.createFactory 'feOffset'
 
 
 # mine_000 = require './mine_000_.coffee'
+flag_001 = require './flag_001_.coffee'
 mine_001 = require './mine_001_.coffee'
-zero_000 = require './zero_000_.coffee'
+# zero_000 = require './zero_000_.coffee'
+zero_001 = require './zero_001_.coffee'
 # one_000 = require './one_000_.coffee'
 one_001 = require './one_001_.coffee'
 two_000 = require './two_000_.coffee'
@@ -122,6 +124,17 @@ module.exports = minesweeper = rr
                     stop
                         offset:"95%"
                         stopColor:"lightblue"
+                radialGradient
+                    id: "rGrad_flag"
+                    stop
+                        offset: "30%"
+                        stopColor: 'black'
+                    stop
+                        offset:"70%"
+                        stopColor: "red"
+                    stop
+                        offset:"95%"
+                        stopColor:"purple"
                 filter
                     id: 'f1'
                     feGaussianBlur
@@ -139,6 +152,7 @@ module.exports = minesweeper = rr
                 for l_tMat, jdx in row
                     do (idx, jdx) =>
                         tile_000 = @props.board["TILE:#{idx}:#{jdx}"]
+                        key = "tile:#{idx}:#{jdx}"
                         [actual, revealed, flagged] = tile_000.split ':'
 
                         # color = switch ((idx * jdx) + idx) % 5
@@ -150,8 +164,8 @@ module.exports = minesweeper = rr
                         tile_0 = @tile_000 l_tMat
                         tile = @rect_t tile_0
                         j_tMat = mat3.multiply mat3.create(), @props.tMat, l_tMat
-                        switch revealed
-                            when NOT_REVEALED
+                        water = =>
+                            if flagged is NOT_FLAGGED
                                 rect
                                     key: "tile:#{idx}:#{jdx}"
                                     x: tile.x
@@ -163,38 +177,64 @@ module.exports = minesweeper = rr
                                     fill: 'url(#rGrad_001)'
                                     stroke: 'blue'
                                     onClick: => @props.reveal("#{TILE}:#{idx}:#{jdx}")
+                                    onContextMenu: (e) => e.preventDefault(); @props.toggle_flag("#{TILE}:#{idx}:#{jdx}")
+                            else
+                                rect
+                                    key: "tile:#{idx}:#{jdx}"
+                                    x: tile.x
+                                    y: tile.y
+                                    width: tile.width
+                                    height: tile.height
+                                    # fill: color
+                                    # filter: 'url(#f1)'
+                                    fill: 'url(#rGrad_flag)'
+                                    stroke: 'red'
+                                    onClick: => @props.reveal("#{TILE}:#{idx}:#{jdx}")
+                                    onContextMenu: (e) => e.preventDefault(); @props.toggle_flag("#{TILE}:#{idx}:#{jdx}")
+                        switch revealed
+                            when NOT_REVEALED
+                                water()
                             when REVEALED
                                 switch actual
                                     when MINED
                                         mine_001
+                                            key: "tile:#{idx}:#{jdx}"
                                             tMat: j_tMat
                                     when UNMINED_ZERO_MINE_NEIGHBORS
-                                        zero_000
+                                        zero_001
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_ONE_MINE_NEIGHBOR
                                         one_001
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_TWO_MINE_NEIGHBORS
                                         two_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_THREE_MINE_NEIGHBORS
                                         three_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_FOUR_MINE_NEIGHBORS
                                         four_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_FIVE_MINE_NEIGHBORS
                                         five_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_SIX_MINE_NEIGHBORS
                                         six_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
                                     when UNMINED_SEVEN_MINE_NEIGHBORS
                                         seven_000
                                             tMat: j_tMat
                                     when UNMINED_EIGHT_MINE_NEIGHBORS
                                         eight_000
                                             tMat: j_tMat
+                                            key: "tile:#{idx}:#{jdx}"
 
             if @props.GAME_STATE is GAME_LOST
                 cursor = @props.GROUND_ZERO.split ':'

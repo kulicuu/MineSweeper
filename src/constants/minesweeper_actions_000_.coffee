@@ -22,3 +22,5 @@ module.exports = minesweeper_action_types = keymirror
     WIN_GAME: null
 
     REVEAL_MULTIPLE: null
+
+    FALLOUT: null

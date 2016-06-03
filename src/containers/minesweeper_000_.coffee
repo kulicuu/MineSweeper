@@ -82,6 +82,8 @@ map_state_to_props = (state, own_props) ->
 map_dispatch_to_props = (dispatch, own_props) ->
 
     return {
+        toggle_flag: (tile_coord) ->
+            dispatch(toggle_flag(tile_coord))
         reveal: (tile_coord) ->
             dispatch(reveal(tile_coord))
         start_new_game: ->

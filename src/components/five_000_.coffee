@@ -77,8 +77,7 @@ module.exports = five = rr
 
                 filter: 'url(#f_zero)'
                 fill: 'hsl(33,99%,99%)'
-                onContextMenu: @props.onContextMenu
-                onClick: @props.onClick
+                onContextMenu: (e) => e.preventDefault();
 
             rect
                 x: o_origin[0]
@@ -90,8 +89,7 @@ module.exports = five = rr
                 #filter: 'url(#f1)'
                 fill: 'url(#five_grad_000)'
                 stroke: 'blue'
-                onContextMenu: @props.onContextMenu
-                onClick: @props.onClick
+                onContextMenu: (e) => e.preventDefault();
             text
                 style:
                     MozUserSelect: 'none'
