@@ -29,6 +29,9 @@ module.exports = ({initial_state, initial_state_pre}) ->
 
     root_reducer = (state, action) =>
         if action.type is START_NEW_GAME
+            timer_ref = state.get("timer_ref")
+            clearTimeout timer_ref
+
             { viewport_width: width, viewport_height: height } = state.toJS()
             state = undefined
 

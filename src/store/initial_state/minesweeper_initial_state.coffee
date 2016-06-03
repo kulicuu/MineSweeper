@@ -60,6 +60,7 @@ module.exports = ( size = 20 ) ->
     starting_board = mine_and_salt_water(size)
 
     game_meta =
+        timer_ref: null
         TIME_ELAPSED: 0
         GAME_STATE: NOT_STARTED
         SIZE: size

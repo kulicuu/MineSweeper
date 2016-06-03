@@ -21,13 +21,13 @@ reveal_multiple = (rayy_zeros) ->
     type: REVEAL_MULTIPLE
     payload: rayy_zeros
 
-fallout = (tile_coord) ->
+fallout = (timer_ref) ->
     type: FALLOUT
-    payload: tile_coord
 
-lose_game = (ground_zero) ->
+lose_game = (ground_zero, timer_ref) ->
     type: LOSE_GAME
     payload: ground_zero
+    timer_ref: timer_ref
 
 
 get_unrevealed_stack = (state) ->
@@ -45,10 +45,11 @@ get_random_index_by_size = (size) ->
 
 
 lose_game_thunk_001 = (dispatch, get_state, ground_zero) =>
-    dispatch(lose_game(ground_zero))
-    setTimeout =>
+    set_fallout = setTimeout =>
         dispatch(fallout())
     , 4390
+    c 'set_fallout', set_fallout
+    dispatch(lose_game(ground_zero, set_fallout))
     return {type: 'THE_END'}
 
 lose_game_thunk = (dispatch, get_state, ground_zero) =>
@@ -160,6 +161,7 @@ reveal_thunk = (tile_coord) ->
 
 
     func_000 = (dispatch, get_state) =>
+        c 'tile_coord', tile_coord
 
         before_state = get_state().get(tile_coord)
 

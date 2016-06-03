@@ -61,14 +61,22 @@ game_generics_reducer_factory = (initial_state) ->
         else
             return prev_state
 
-    return { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer }
+    timer_ref_reducer = (prev_state = initial_state, action) ->
+        if action.type is LOSE_GAME
+            return action.timer_ref
+        else
+            return prev_state
+
+    return { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer, timer_ref_reducer }
+
 
 
 module.exports = ({initial_state, arq_0})->
 
 
-    { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer } = game_generics_reducer_factory(initial_state)
+    { size_reducer, game_state_reducer, time_elapsed_reducer, ground_zero_reducer, timer_ref_reducer} = game_generics_reducer_factory(initial_state)
     arq = {
+        timer_ref: timer_ref_reducer
         SIZE: size_reducer
         GAME_STATE: game_state_reducer
         TIME_ELAPSED: time_elapsed_reducer
