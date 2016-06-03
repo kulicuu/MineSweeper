@@ -4,8 +4,7 @@
 
 ###### play
 Play this implementation online at:
-
-[minesweeper-svg.herokuapp.com](minesweeper-svg.herokuapp.com)
+[minesweeper-svg.herokuapp.com](https://minesweeper-svg.herokuapp.com/)
 
 ###### develop
 To build, develop, and play locally:
