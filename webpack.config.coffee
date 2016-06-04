@@ -13,7 +13,6 @@ module.exports = config =
     cache: true
     debug: true
     entry:
-        #app: ['webpack/hot/dev-server', './vickers__workshop.coffee']
         app: ['./src/index.coffee']
     stats:
         colors: on
