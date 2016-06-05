@@ -30,6 +30,7 @@
         "redux-promise": "latest",
         "redux-saga": "latest",
         "redux-thunk": "latest",
+        "source-map-loader": "latest",
         "style-loader": "^0.13.0",
         "ws": "latest"
     },
