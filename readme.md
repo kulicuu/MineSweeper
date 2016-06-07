@@ -9,13 +9,14 @@ Play this implementation online at:
 ###### develop
 To build, develop, and play locally:
 
-- clone, npm install,
+- clone, `npm install`, `npm install -g coffee-script`, `npm install -g webpack`
 - `webpack -w`
-- `coffee server.coffee`, you maybe need to install `npm install -g coffee-script` globally first.
+- `coffee server.coffee`
 - open browser at `localhost:3000`
 - open text editor and hack away.  (You'll need to refresh the page manually to get fresh batch from webpack; I find this superior to having the page reload itself everytime I save a file).
 
 ###### ttd:
+- win game sequence
 - timer time elapsed
 - performance tuning
-- better graphics,
+- better graphic-design,

@@ -175,6 +175,8 @@ module.exports = minesweeper = rr
                                     # fill: color
                                     # filter: 'url(#f1)'
                                     fill: 'url(#rGrad_001)'
+                                    # fill: 'red'
+                                    # fill: 'yellow'
                                     stroke: 'blue'
                                     onClick: => @props.reveal("#{TILE}:#{idx}:#{jdx}")
                                     onContextMenu: (e) => e.preventDefault(); @props.toggle_flag("#{TILE}:#{idx}:#{jdx}")

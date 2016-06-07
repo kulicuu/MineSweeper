@@ -1,5 +1,5 @@
 c = -> console.log.apply console, arguments
-# webpack = require 'webpack'
+
 path = require 'path'
 
 module.exports = config =
