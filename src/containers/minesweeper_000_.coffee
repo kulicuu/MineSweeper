@@ -11,7 +11,7 @@ minesweeper = require '../components/minesweeper_000_.coffee'
 mine_000 = require '../components/mine_000_.coffee'
 one_000 = require '../components/one_000_.coffee'
 
-grab_board = (state) ->
+# grab_board = (state) ->
 
 
 
@@ -19,9 +19,9 @@ map_state_to_props = (state, own_props) ->
     # viewport_x = state.get 'viewport_x'
     # viewport_y = state.get 'viewport_y'
 
-    grab_board state
+    # grab_board state
 
-    obj_0 = state.toJS()
+    # obj_0 = state.toJS()
 
     obj_1 = state.toObject()
 

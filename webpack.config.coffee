@@ -32,6 +32,9 @@ module.exports = config =
                 loaders: ['coffee-loader', 'source-map-loader']
             }
         ]
+    externals:
+        "react": "React",
+        "react-dom": "ReactDOM"
     output:
         path: __dirname
         filename: "build/app.js"
