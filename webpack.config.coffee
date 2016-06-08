@@ -1,6 +1,7 @@
 c = -> console.log.apply console, arguments
 
 path = require 'path'
+webpack = require 'webpack'
 
 module.exports = config =
     # worker:
@@ -38,3 +39,12 @@ module.exports = config =
     output:
         path: __dirname
         filename: "build/app.js"
+    plugins: [
+        new webpack.DefinePlugin
+            'process.env':
+                NODE_ENV: '"production"'
+            __CLIENT__: true
+            __SERVER__: false
+            __DEVELOPMENT__: false
+            __DEVTOOLS__: false
+    ]
